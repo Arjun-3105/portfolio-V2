@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode tokens (Warm Ivory Editorial) */
+  --canvas: #F8F7F4;
+  --canvas-subtle: #F1EFEB;
+  --canvas-card: #FCFBF9;
+  --canvas-hover: #ECE9E2;
+  --fg: #131417;
+  --fg-muted: #5E5D59;
+  --fg-subtle: #8C8A84;
+  --fg-dim: #C4C2BB;
+  --border-editorial: rgba(19, 20, 23, 0.09);
+  --border-subtle: rgba(19, 20, 23, 0.05);
+  --card-border: rgba(19, 20, 23, 0.08);
+  --accent: #8E6A3E;
+  --accent-glow: rgba(142, 106, 62, 0.12);
+  --noise-opacity: 0.035;
+}
+
+.dark {
+  /* Dark mode tokens (Cinematic Deep Charcoal / Moon) */
+  --canvas: #0B0C0E;
+  --canvas-subtle: #121316;
+  --canvas-card: #15171B;
+  --canvas-hover: #1D2026;
+  --fg: #EDECE8;
+  --fg-muted: #9E9D98;
+  --fg-subtle: #63625E;
+  --fg-dim: #32343A;
+  --border-editorial: rgba(255, 255, 255, 0.11);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.09);
+  --accent: #E0A96D;
+  --accent-glow: rgba(224, 169, 109, 0.18);
+  --noise-opacity: 0.045;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light dark;
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--fg);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+/* Subtle editorial grain texture */
+.paper-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Editorial selection */
+::selection {
+  background-color: var(--accent);
+  color: #FFFFFF;
+}
+
+/* Minimalist scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-editorial);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-subtle);
+}
+
+/* Typography styles */
+.editorial-italic {
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.editorial-headline {
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.editorial-meta {
+  font-family: var(--font-jakarta), sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
