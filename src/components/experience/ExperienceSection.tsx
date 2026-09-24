@@ -60,7 +60,6 @@ export default function ExperienceSection() {
                 </span>
               </h2>
               <p className="text-sm sm:text-base text-fg-muted font-light mt-3 max-w-2xl leading-relaxed">
-                A non-linear, cross-branching timeline of production engineering roles, distributed worker pipelines, and quantifiable backend architecture.
               </p>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono text-fg-subtle border border-editorial-border px-3.5 py-1.5 rounded-full bg-canvas-card shadow-sm">
