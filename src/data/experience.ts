@@ -110,7 +110,7 @@ export const achievementsList: Achievement[] = [
     title: "Hyperspectral Research",
     subtitle: "Machine Learning & Remote Sensing",
     description: "Authored research on UAV hyperspectral imaging for wheat yield prediction utilizing the Minnesota DRUM agricultural dataset.",
-    metric: "Published Research",
+    metric: "Research",
     tag: "UAV · DRUM Dataset",
   },
 ];
