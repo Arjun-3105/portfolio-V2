@@ -84,7 +84,7 @@ export default function ContactSection() {
 
             <div className="space-y-4">
               <a
-                href="https://github.com/arjun-chaudhary"
+                href="https://github.com/arjun-3105"
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center justify-between py-2 border-b border-editorial-border/60 text-xs font-mono uppercase tracking-editorial text-fg-muted hover:text-fg transition-colors"
@@ -97,7 +97,7 @@ export default function ContactSection() {
               </a>
 
               <a
-                href="https://linkedin.com/in/arjun-chaudhary"
+                href="https://linkedin.com/in/0xarjun1"
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center justify-between py-2 border-b border-editorial-border/60 text-xs font-mono uppercase tracking-editorial text-fg-muted hover:text-fg transition-colors"
@@ -110,7 +110,7 @@ export default function ContactSection() {
               </a>
 
               <a
-                href="https://x.com/arjun_builds"
+                href="https://x.com/0xarjun"
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center justify-between py-2 border-b border-editorial-border/60 text-xs font-mono uppercase tracking-editorial text-fg-muted hover:text-fg transition-colors"
