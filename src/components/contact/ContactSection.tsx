@@ -5,7 +5,7 @@ import { ArrowUpRight, Copy, Check, Mail, Github, Linkedin, Twitter, Sparkles } 
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
-  const emailAddress = "arjun.chaudhary@example.com"; // User's email
+  const emailAddress = "arjun.chaudhary3105@gmail.com"; // User's email
 
   const handleCopy = () => {
     navigator.clipboard.writeText(emailAddress);
