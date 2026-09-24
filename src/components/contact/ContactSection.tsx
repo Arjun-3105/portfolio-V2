@@ -110,7 +110,7 @@ export default function ContactSection() {
               </a>
 
               <a
-                href="https://x.com/0xarjun"
+                href="https://x.com/Oxarjun1"
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center justify-between py-2 border-b border-editorial-border/60 text-xs font-mono uppercase tracking-editorial text-fg-muted hover:text-fg transition-colors"
