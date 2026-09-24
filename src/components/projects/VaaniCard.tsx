@@ -103,7 +103,7 @@ export default function VaaniCard({ project, onOpenCaseStudy }: VaaniCardProps) 
           <AppWindowFrame
             src={project.image}
             alt="Vaani Hindi Voice RAG application on HuggingFace Spaces"
-            url="huggingface.co/spaces/0xarjun/vaani"
+            url="huggingface.co/spaces/oxarjun/vaani"
             badge="HUGGINGFACE SPACE"
             aspect="aspect-[16/9.5]"
           />
