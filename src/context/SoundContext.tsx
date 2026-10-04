@@ -300,26 +300,6 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [getAudioContext, soundEnabled]);
 
-  // Subtle tactile ratchet feedback on window scroll
-  useEffect(() => {
-    if (!soundEnabled) return;
-    let lastScrollY = window.scrollY;
-    let lastTickTime = 0;
-    const threshold = 260;
-
-    const handleScroll = () => {
-      const now = Date.now();
-      const currentScrollY = window.scrollY;
-      if (Math.abs(currentScrollY - lastScrollY) >= threshold && now - lastTickTime > 120) {
-        playTickSound();
-        lastScrollY = currentScrollY;
-        lastTickTime = now;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [soundEnabled, playTickSound]);
 
   // 4. Soft success chime
   const playSuccessSound = useCallback(() => {

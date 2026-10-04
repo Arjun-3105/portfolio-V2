@@ -18,21 +18,21 @@ import {
 } from "lucide-react";
 
 export default function SelectedWork() {
-  const { playTick } = useSound();
+  const { playKey } = useSound();
   const [activeIndex, setActiveIndex] = useState(2); // Default to Vaani (03)
   const [modalProjectId, setModalProjectId] = useState<string | null>(null);
   const total = projects.length;
   const lastWheelTime = useRef<number>(0);
 
   const handleNext = useCallback(() => {
-    playTick();
+    playKey();
     setActiveIndex((prev) => (prev + 1) % total);
-  }, [total, playTick]);
+  }, [total, playKey]);
 
   const handlePrev = useCallback(() => {
-    playTick();
+    playKey();
     setActiveIndex((prev) => (prev - 1 + total) % total);
-  }, [total, playTick]);
+  }, [total, playKey]);
 
   // Stage wheel navigation (horizontal trackpad scroll)
   const handleStageWheel = (e: React.WheelEvent) => {
@@ -156,7 +156,7 @@ export default function SelectedWork() {
                 key={project.id}
                 onClick={() => {
                   if (!isCenter) {
-                    playTick();
+                    playKey();
                     setActiveIndex(index);
                   }
                 }}
@@ -298,7 +298,7 @@ export default function SelectedWork() {
               <button
                 key={p.id}
                 onClick={() => {
-                  playTick();
+                  playKey();
                   setActiveIndex(idx);
                 }}
                 className={`transition-all duration-300 rounded-full ${
