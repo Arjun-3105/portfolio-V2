@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { projects, Project } from "@/data/projects";
 import CaseStudyModal from "./CaseStudyModal";
+import { useSound } from "@/context/SoundContext";
 import {
   ArrowUpRight,
   ChevronLeft,
@@ -17,17 +18,35 @@ import {
 } from "lucide-react";
 
 export default function SelectedWork() {
+  const { playTick } = useSound();
   const [activeIndex, setActiveIndex] = useState(2); // Default to Vaani (03)
   const [modalProjectId, setModalProjectId] = useState<string | null>(null);
   const total = projects.length;
+  const lastWheelTime = useRef<number>(0);
 
   const handleNext = useCallback(() => {
+    playTick();
     setActiveIndex((prev) => (prev + 1) % total);
-  }, [total]);
+  }, [total, playTick]);
 
   const handlePrev = useCallback(() => {
+    playTick();
     setActiveIndex((prev) => (prev - 1 + total) % total);
-  }, [total]);
+  }, [total, playTick]);
+
+  // Stage wheel navigation (horizontal trackpad scroll)
+  const handleStageWheel = (e: React.WheelEvent) => {
+    const now = Date.now();
+    if (now - lastWheelTime.current < 240) return;
+    if (Math.abs(e.deltaX) > 20) {
+      if (e.deltaX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+      lastWheelTime.current = now;
+    }
+  };
 
   // Keyboard navigation (horizontal arrow keys only, preserving vertical page scroll)
   useEffect(() => {
@@ -108,6 +127,7 @@ export default function SelectedWork() {
 
         {/* 3D Spatial Carousel Stage */}
         <div
+          onWheel={handleStageWheel}
           className="relative w-full h-[580px] sm:h-[640px] flex items-center justify-center select-none"
           style={{ perspective: 1200 }}
         >
@@ -135,7 +155,10 @@ export default function SelectedWork() {
               <motion.div
                 key={project.id}
                 onClick={() => {
-                  if (!isCenter) setActiveIndex(index);
+                  if (!isCenter) {
+                    playTick();
+                    setActiveIndex(index);
+                  }
                 }}
                 animate={{
                   x: xOffset,
@@ -274,7 +297,10 @@ export default function SelectedWork() {
             {projects.map((p, idx) => (
               <button
                 key={p.id}
-                onClick={() => setActiveIndex(idx)}
+                onClick={() => {
+                  playTick();
+                  setActiveIndex(idx);
+                }}
                 className={`transition-all duration-300 rounded-full ${
                   idx === activeIndex
                     ? "w-8 h-2 bg-editorial-accent shadow-[0_0_8px_var(--accent)]"

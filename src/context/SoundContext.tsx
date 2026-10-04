@@ -276,7 +276,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [getAudioContext, soundEnabled]);
 
-  // 3. Subtle tick for carousel rotation
+  // 3. Subtle tactical tick for carousel / scroll rotation
   const playTickSound = useCallback(() => {
     if (!soundEnabled) return;
     try {
@@ -285,20 +285,41 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(480, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(280, ctx.currentTime + 0.025);
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(560 + Math.random() * 60, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.02);
 
-      gain.gain.setValueAtTime(0.06, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.025);
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
 
       osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.03);
+      osc.stop(ctx.currentTime + 0.025);
     } catch {}
   }, [getAudioContext, soundEnabled]);
+
+  // Subtle tactile ratchet feedback on window scroll
+  useEffect(() => {
+    if (!soundEnabled) return;
+    let lastScrollY = window.scrollY;
+    let lastTickTime = 0;
+    const threshold = 260;
+
+    const handleScroll = () => {
+      const now = Date.now();
+      const currentScrollY = window.scrollY;
+      if (Math.abs(currentScrollY - lastScrollY) >= threshold && now - lastTickTime > 120) {
+        playTickSound();
+        lastScrollY = currentScrollY;
+        lastTickTime = now;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [soundEnabled, playTickSound]);
 
   // 4. Soft success chime
   const playSuccessSound = useCallback(() => {
