@@ -226,15 +226,15 @@ export default function CommandPalette({
       },
     },
     {
-      id: "soc-leetcode",
+      id: "soc-twitter",
       category: "Socials",
-      label: "Open LeetCode Profile",
-      desc: "leetcode.com/0xarjun (400+ Solved)",
+      label: "Open X (Twitter) Profile",
+      desc: "x.com/Oxarjun1",
       icon: ExternalLink,
       badge: "EXTERNAL",
       action: () => {
         playClick();
-        window.open("https://leetcode.com/0xarjun", "_blank");
+        window.open("https://x.com/Oxarjun1", "_blank");
         onClose();
       },
     },
@@ -495,7 +495,7 @@ export default function CommandPalette({
                   <div className="p-3 rounded-lg bg-canvas border border-editorial-border/60 grid grid-cols-2 gap-2 text-[11px]">
                     <div><span className="text-emerald-500 font-bold">whoami</span> — Quick intro &amp; bio</div>
                     <div><span className="text-emerald-500 font-bold">skills</span> — Tech stack breakdown</div>
-                    <div><span className="text-emerald-500 font-bold">stats</span> — 400+ DSA, 9.5 CGPA</div>
+                    <div><span className="text-emerald-500 font-bold">stats</span> — Academics &amp; 9.5 CGPA</div>
                     <div><span className="text-emerald-500 font-bold">experience</span> — Production roles</div>
                     <div><span className="text-emerald-500 font-bold">projects</span> — Flagship builds</div>
                     <div><span className="text-emerald-500 font-bold">contact</span> — Reach out</div>

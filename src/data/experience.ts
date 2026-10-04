@@ -93,11 +93,11 @@ export const educationInfo = {
 
 export const achievementsList: Achievement[] = [
   {
-    title: "LeetCode Problem Solving",
-    subtitle: "Competitive Programming",
-    description: "Solved 400+ DSA problems across LeetCode and competitive platforms with consistent algorithmic practice.",
-    metric: "400+ Solved",
-    tag: "DSA · Rating ~1550",
+    title: "Open Source Systems",
+    subtitle: "Production & Tooling",
+    description: "Architected and shipped production-ready open source systems including LearnLoop, RoBERTa Legal AI, and high-throughput vector platforms.",
+    metric: "8+ Repos",
+    tag: "Open Source · Systems",
   },
   {
     title: "University Hackathons",

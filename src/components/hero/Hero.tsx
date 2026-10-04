@@ -284,12 +284,12 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
           </a>
           <span>·</span>
           <a
-            href="https://leetcode.com/0xarjun"
+            href="https://x.com/Oxarjun1"
             target="_blank"
             rel="noreferrer"
             className="hover:text-fg transition-colors"
           >
-            LEETCODE
+            X (TWITTER)
           </a>
         </div>
       </div>

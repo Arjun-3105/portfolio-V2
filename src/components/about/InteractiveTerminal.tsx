@@ -107,8 +107,8 @@ export default function InteractiveTerminal() {
       case "stats":
         outputNode = (
           <div className="space-y-1.5 font-mono text-[11px] text-fg-muted">
-            <p>📊 <span className="text-fg font-medium">CGPA:</span> 9.5 / 10 (Dean&apos;s List · Top 5% at Bennett University)</p>
-            <p>⚡ <span className="text-fg font-medium">LeetCode:</span> 400+ problems solved (~1550 rating, Arrays, Graphs, DP)</p>
+            <p>📊 <span className="text-fg font-medium">Academics:</span> CGPA 9.5 / 10 (Dean&apos;s List · Top 5% at Bennett University)</p>
+            <p>💻 <span className="text-fg font-medium">Systems:</span> 8+ open-source production projects across RAG, vector search &amp; Linux daemons</p>
             <p>🏢 <span className="text-fg font-medium">Internship:</span> WhatBytes (Django, Celery, Redis, Playwright scraping)</p>
             <p>🏆 <span className="text-fg font-medium">Hackathons:</span> Top 20 across multiple university hackathons</p>
             <p>🔬 <span className="text-fg font-medium">Research:</span> UAV hyperspectral imaging for wheat yield prediction (Minnesota DRUM)</p>
@@ -151,7 +151,7 @@ export default function InteractiveTerminal() {
             <p>📧 Email: <a href="mailto:arjun.chaudhary3105@gmail.com" className="text-editorial-accent hover:underline">arjun.chaudhary3105@gmail.com</a></p>
             <p>🐙 GitHub: <a href="https://github.com/Arjun-3105" target="_blank" rel="noreferrer" className="text-editorial-accent hover:underline">github.com/Arjun-3105</a></p>
             <p>💼 LinkedIn: <a href="https://linkedin.com/in/0xarjun1" target="_blank" rel="noreferrer" className="text-editorial-accent hover:underline">linkedin.com/in/0xarjun1</a></p>
-            <p>⚡ LeetCode: <a href="https://leetcode.com/0xarjun" target="_blank" rel="noreferrer" className="text-editorial-accent hover:underline">leetcode.com/0xarjun</a></p>
+            <p>𝕏 X (Twitter): <a href="https://x.com/Oxarjun1" target="_blank" rel="noreferrer" className="text-editorial-accent hover:underline">x.com/Oxarjun1</a></p>
           </div>
         );
         break;

@@ -109,18 +109,6 @@ export default function ContactSection() {
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-fg-subtle group-hover:text-fg" />
               </a>
 
-              <a
-                href="https://leetcode.com/0xarjun"
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center justify-between py-2 border-b border-editorial-border/60 text-xs font-mono uppercase tracking-editorial text-fg-muted hover:text-fg transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <Sparkles className="w-4 h-4 text-editorial-accent" />
-                  <span>LEETCODE (400+ SOLVED)</span>
-                </div>
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-fg-subtle group-hover:text-fg" />
-              </a>
 
               <a
                 href="https://x.com/Oxarjun1"

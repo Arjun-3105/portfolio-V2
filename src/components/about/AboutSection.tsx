@@ -35,7 +35,7 @@ export default function AboutSection() {
                 Most of my engineering revolves around backend systems, asynchronous task queues with Celery &amp; Redis, web scraping pipelines, and domain-grounded retrieval (RAG). I like building tools that are fast, deterministic, and handle messy real-world data without breaking.
               </p>
               <p>
-                I maintain a <span className="text-fg font-medium">9.5 / 10 CGPA</span> (Top 5% · Dean&apos;s List), have solved <span className="text-fg font-medium">400+ problems on LeetCode</span>, and spend my free time exploring Linux system internals and shipping open-source projects like LearnLoop, RoBERTa Legal AI, and Vaani.
+                I maintain a <span className="text-fg font-medium">9.5 / 10 CGPA</span> (Top 5% · Dean&apos;s List), and spend my free time exploring Linux system internals and shipping production-ready open-source projects like LearnLoop, RoBERTa Legal AI, and Vaani.
               </p>
             </div>
 
@@ -66,11 +66,11 @@ export default function AboutSection() {
               <div className="p-3.5 rounded-xl border border-editorial-border bg-canvas-card space-y-1">
                 <div className="flex items-center gap-2 text-editorial-accent text-xs font-mono">
                   <Code2 className="w-4 h-4" />
-                  <span>DATA STRUCTURES</span>
+                  <span>OPEN SOURCE</span>
                 </div>
-                <p className="text-xs font-semibold text-fg">400+ Problems Solved</p>
+                <p className="text-xs font-semibold text-fg">8+ Flagship Projects</p>
                 <p className="text-[11px] text-fg-muted">
-                  LeetCode &amp; Contests (Rating ~1550)
+                  Production systems, RAG, &amp; vector tooling
                 </p>
               </div>
 
