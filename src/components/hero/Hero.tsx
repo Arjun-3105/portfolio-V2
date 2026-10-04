@@ -291,7 +291,6 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
             className="hover:text-fg transition-colors"
           >
             LEETCODE
-            X (TWITTER)
           </a>
         </div>
       </div>

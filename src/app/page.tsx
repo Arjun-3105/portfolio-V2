@@ -7,7 +7,6 @@ import Hero from "@/components/hero/Hero";
 import ExperienceSection from "@/components/experience/ExperienceSection";
 import SelectedWork from "@/components/projects/SelectedWork";
 import AboutSection from "@/components/about/AboutSection";
-import WritingSection from "@/components/writing/WritingSection";
 import ContactSection from "@/components/contact/ContactSection";
 import CaseStudyModal from "@/components/projects/CaseStudyModal";
 import { projects, Project } from "@/data/projects";
@@ -38,10 +37,7 @@ export default function HomePage() {
       {/* Chapter 04: About & Humanizing the Story */}
       <AboutSection />
 
-      {/* Chapter 05: Writing & Workbench Experiments */}
-      <WritingSection />
-
-      {/* Chapter 06: Contact & Closing Signature */}
+      {/* Chapter 05: Contact & Closing Signature */}
       <ContactSection />
 
       {/* Case Study Modal (if opened from hero or quick links) */}

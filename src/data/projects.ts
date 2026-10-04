@@ -140,51 +140,54 @@ export const projects: Project[] = [
     id: "vaani",
     number: "03",
     name: "Vaani",
-    tagline: "Voice-enabled RAG system for real conversations.",
+    tagline: "Voice-enabled RAG system for real conversations in Hindi.",
     description:
-      "A conversational voice intelligence system with ultra-low latency audio streaming, dynamic interruption handling, and grounded retrieval guardrails.",
-    tags: ["VOICE", "RAG", "LLM", "SAFETY"],
-    image: "/images/projects/vaani-preview.png",
-    githubUrl: "https://github.com/arjun-chaudhary/vaani",
-    liveUrl: "https://vaani-voice.vercel.app",
+      "A speech-to-speech conversational AI system built for Hackathon Goa 2026. Streams Hindi audio end-to-end using Sarvam AI STT/TTS, FAISS vector retrieval over MS MARCO-X!, Groq-accelerated generation, and 4 strict hallucination guardrails.",
+    tags: ["VOICE RAG", "HINDI STT/TTS", "FAISS", "SARVAM AI", "GROQ"],
+    image: "/images/projects/vaani-app.png",
+    githubUrl: "https://github.com/Arjun-3105/vaani",
+    liveUrl: "https://huggingface.co/spaces/oxarjun/vaani",
     highlights: [
-      "Sub-480ms end-to-end voice round-trip latency",
-      "Barge-in / natural interruption detection",
-      "Strict retrieval grounding with zero factual hallucination",
+      "Live on HuggingFace Spaces (oxarjun/vaani)",
+      "Sarvam AI speech-to-speech pipeline with saaras:v3 voice synthesis",
+      "FAISS IndexFlatIP over 74,182 vectors with multilingual-mpnet-base-v2",
+      "Sub-second speech response with 4 strict safety and grounding guardrails",
     ],
     caseStudy: {
       problem:
-        "Most voice AI feels like speaking into a walkie-talkie—clunky 3-second pauses, robotic cadence, inability to interrupt naturally, and frequent hallucinations when quoting technical facts.",
-      idea: "A conversational voice agent that operates at natural human speeds, retrieving ground-truth documentation in parallel with acoustic stream generation so dialogue flows uninterrupted.",
+        "Voice assistants in Indic languages frequently suffer from heavy latency, awkward transliteration errors, and factual hallucinations when answering informational questions in Hindi.",
+      idea: "An end-to-end speech-to-speech RAG platform tailored for Hindi, combining Sarvam AI's Indic models, dense multilingual vector embeddings, Groq-accelerated reasoning, and multi-stage factual guardrails.",
       system: {
         overview:
-          "Vaani replaces traditional sequential pipelines (STT -> LLM -> TTS) with overlapping streaming pipelines over bidirectional WebSockets, initiating vector search before speech recognition completes.",
+          "Built for Hackathon Goa 2026 (Task 02 - Voice RAG), Vaani links in-browser 16kHz mono audio capture with Sarvam STT, FAISS vector search, Groq LPU inference, and Sarvam saaras:v3 TTS synthesis.",
         architecture: [
-          "Bidirectional WebSocket audio streaming with client-side Voice Activity Detection (VAD)",
-          "Speculative RAG: document search triggers on early phonetic transcript chunks",
-          "Low-latency streaming TTS synthesis with instant buffer flush on interruption",
+          "In-browser 16 kHz mono WAV audio capture posting to /query/voice",
+          "Sarvam AI Indic speech-to-text transcription",
+          "FAISS IndexFlatIP indexing 74,182 vectors with sentence-transformers/multilingual-mpnet-base-v2 over MS MARCO-X!",
+          "Groq LPU generation running openai/gpt-oss-28b with four validation guardrails",
+          "Sarvam saaras:v3 low-latency Hindi text-to-speech synthesis",
         ],
-        technologies: ["WebRTC / WebSockets", "Whisper Streaming", "Cartesia / ElevenLabs", "FastAPI", "ChromaDB", "React"],
+        technologies: ["HuggingFace Spaces", "Python", "Sarvam AI", "FAISS", "Groq LPU", "MS MARCO-X!", "multilingual-mpnet-base-v2"],
       },
       build: {
         details:
-          "Implemented client-side VAD using Silero to detect when the human begins speaking, instantly sending an interrupt signal that cuts audio playback within 30ms and clears the server generation queue.",
+          "Engineered an end-to-end pipeline measuring exact millisecond latency across every stage: STT, semantic chunking, vector retrieval, LLM reasoning, safety guardrail checks, and TTS synthesis.",
         keyDecisions: [
-          "Streamed LLM tokens directly to acoustic synthesis chunk-by-chunk rather than waiting for full sentences.",
-          "Implemented strict hallucination guardrails that instruct the voice agent to politely decline when source context is insufficient.",
+          "Indexed 74,182 passages from MS MARCO-X! into FAISS IndexFlatIP for instant vector similarity search.",
+          "Enforced four strict grounding guardrails before speech synthesis to completely eliminate fabricated claims.",
         ],
       },
       result: {
         metrics: [
-          "End-to-end round-trip latency: ~480ms",
-          "Interruption response time: < 35ms",
-          "Zero hallucinated document claims in benchmark test suites",
+          "74,182 vectors indexed in FAISS",
+          "End-to-end speech-to-speech Hindi generation",
+          "Live in production on HuggingFace Spaces (oxarjun/vaani)",
         ],
         outcome:
-          "Users reported the conversation felt like talking to an attentive human colleague rather than a scripted voice assistant.",
+          "Delivers natural, spoken Hindi answers grounded strictly in retrieved documents with timed latency metrics at every stage.",
       },
       learnings:
-        "Human conversation lives in micro-latencies. When response latency drops below 500ms, the psychological barrier drops—users stop treating the system as software and start collaborating naturally.",
+        "Indic speech RAG requires specialized acoustic models and multilingual embeddings. Treating Hindi as a first-class citizen rather than translating to English dramatically boosts user engagement and trust.",
     },
   },
   {

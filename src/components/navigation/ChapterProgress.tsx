@@ -12,9 +12,8 @@ const CHAPTERS: Chapter[] = [
   { id: "hero", num: "01", title: "A CURIOUS MIND" },
   { id: "experience", num: "02", title: "EXPERIENCE" },
   { id: "work", num: "03", title: "THINGS I'VE BUILT" },
-  { id: "about", num: "04", title: "BEYOND CODE" },
-  { id: "writing", num: "05", title: "DISPATCHES" },
-  { id: "contact", num: "06", title: "LET'S BUILD" },
+  { id: "about", num: "04", title: "ABOUT ARJUN" },
+  { id: "contact", num: "05", title: "LET'S BUILD" },
 ];
 
 export default function ChapterProgress() {

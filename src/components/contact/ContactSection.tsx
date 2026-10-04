@@ -5,7 +5,7 @@ import { ArrowUpRight, Copy, Check, Mail, Github, Linkedin, Twitter, Sparkles } 
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
-  const emailAddress = "arjun.chaudhary3105@gmail.com"; // User's email
+  const emailAddress = "arjun.chaudhary3105@gmail.com";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -18,7 +18,7 @@ export default function ContactSection() {
       <div className="max-w-7xl mx-auto space-y-20">
         {/* Chapter Header */}
         <div className="flex items-center gap-3">
-          <span className="editorial-meta text-editorial-accent">06 / LET&apos;S BUILD</span>
+          <span className="editorial-meta text-editorial-accent">05 / LET&apos;S BUILD</span>
           <span className="h-[1px] w-8 bg-editorial-border" />
           <span className="text-[11px] font-mono uppercase tracking-editorial text-fg-subtle">
             CLOSING CHAPTER
@@ -78,13 +78,13 @@ export default function ContactSection() {
                 </p>
               </div>
               <p className="text-xs text-fg-muted font-light">
-                Feel free to reach out about systems, AI infrastructure, or good books.
+                Feel free to reach out about backend systems, distributed architectures, or engineering roles.
               </p>
             </div>
 
             <div className="space-y-4">
               <a
-                href="https://github.com/arjun-3105"
+                href="https://github.com/Arjun-3105"
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center justify-between py-2 border-b border-editorial-border/60 text-xs font-mono uppercase tracking-editorial text-fg-muted hover:text-fg transition-colors"
@@ -105,6 +105,19 @@ export default function ContactSection() {
                 <div className="flex items-center gap-3">
                   <Linkedin className="w-4 h-4 text-editorial-accent" />
                   <span>LINKEDIN</span>
+                </div>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-fg-subtle group-hover:text-fg" />
+              </a>
+
+              <a
+                href="https://leetcode.com/0xarjun"
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center justify-between py-2 border-b border-editorial-border/60 text-xs font-mono uppercase tracking-editorial text-fg-muted hover:text-fg transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <Sparkles className="w-4 h-4 text-editorial-accent" />
+                  <span>LEETCODE (400+ SOLVED)</span>
                 </div>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-fg-subtle group-hover:text-fg" />
               </a>
@@ -156,4 +169,3 @@ export default function ContactSection() {
     </footer>
   );
 }
-
