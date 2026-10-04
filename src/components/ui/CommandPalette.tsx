@@ -188,10 +188,11 @@ export default function CommandPalette({
     {
       id: "act-sound",
       category: "Actions",
-      label: soundEnabled ? "Disable UI Sound Effects" : "Enable Tactile UI Sound",
-      desc: soundEnabled ? "Mute Web Audio synthesized clicks" : "Turn on mechanical click feedback",
+      label: soundEnabled ? "Mute Ambient Pad & Sound FX" : "Enable Ambient Pad & UI Sound",
+      desc: soundEnabled ? "Turn off background ambient harmonics & clicks" : "Generative ambient pad + synthesized clicks",
       icon: soundEnabled ? VolumeX : Volume2,
       badge: soundEnabled ? "ON" : "OFF",
+      keywords: ["sound", "audio", "music", "ambient", "pad", "mute", "volume"],
       action: () => {
         toggleSound();
       },
