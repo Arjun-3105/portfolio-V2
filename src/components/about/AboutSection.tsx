@@ -1,13 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import InteractiveTerminal from "./InteractiveTerminal";
-import SystemArchitectureSimulator from "./SystemArchitectureSimulator";
-import { Terminal, Zap, ArrowUpRight, GraduationCap, Briefcase, Award, Code2, FileText, Mail } from "lucide-react";
+import { GraduationCap, Briefcase, Award, Code2, Mail } from "lucide-react";
 
 export default function AboutSection() {
-  const [activeTab, setActiveTab] = useState<"terminal" | "simulator">("terminal");
-
   return (
     <section id="about" className="py-24 px-6 sm:px-10 border-b border-editorial-border bg-canvas">
       <div className="max-w-7xl mx-auto space-y-12">
@@ -17,7 +14,7 @@ export default function AboutSection() {
             <span className="editorial-meta text-editorial-accent">04 / ABOUT ME</span>
             <span className="h-[1px] w-8 bg-editorial-border" />
             <span className="text-[11px] font-mono uppercase tracking-editorial text-fg-subtle">
-              BACKGROUND &amp; WORKBENCH
+              BACKGROUND &amp; WORKSPACE
             </span>
           </div>
 
@@ -26,7 +23,7 @@ export default function AboutSection() {
           </h2>
         </div>
 
-        {/* 2-Column Layout: Left Narrative, Right Interactive Workbench */}
+        {/* 2-Column Layout: Left Narrative, Right Interactive CLI Terminal */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Column: Human Narrative & Verified Facts (Cols 1-6) */}
           <div className="lg:col-span-6 space-y-6">
@@ -119,45 +116,9 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right Column: Interactive Workbench (Terminal / Simulator) (Cols 7-12) */}
-          <div className="lg:col-span-6 space-y-4">
-            {/* Workbench Tab Switcher */}
-            <div className="flex items-center justify-between p-1.5 rounded-xl border border-editorial-border bg-canvas-card">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-fg-subtle px-2">
-                INTERACTIVE WORKBENCH
-              </span>
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={() => setActiveTab("terminal")}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                    activeTab === "terminal"
-                      ? "bg-editorial-accent text-canvas font-medium shadow-xs"
-                      : "text-fg-muted hover:text-fg hover:bg-canvas-subtle"
-                  }`}
-                >
-                  <Terminal className="w-3.5 h-3.5" />
-                  <span>CLI Terminal</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveTab("simulator")}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                    activeTab === "simulator"
-                      ? "bg-editorial-accent text-canvas font-medium shadow-xs"
-                      : "text-fg-muted hover:text-fg hover:bg-canvas-subtle"
-                  }`}
-                >
-                  <Zap className="w-3.5 h-3.5" />
-                  <span>Pipeline Simulator</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Tab 1: Live Interactive CLI Terminal */}
-            {activeTab === "terminal" && <InteractiveTerminal />}
-
-            {/* Tab 2: Live Architecture Pipeline Simulator */}
-            {activeTab === "simulator" && <SystemArchitectureSimulator />}
+          {/* Right Column: Interactive CLI Terminal (Cols 7-12) */}
+          <div className="lg:col-span-6">
+            <InteractiveTerminal />
           </div>
         </div>
       </div>
