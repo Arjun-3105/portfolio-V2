@@ -20,15 +20,19 @@ import {
   Compass,
   FileText,
   CornerDownLeft,
+  HelpCircle,
+  Keyboard,
+  BookOpen,
 } from "lucide-react";
 
 interface CommandItem {
   id: string;
-  category: "Navigation" | "Projects" | "Actions" | "Socials";
+  category: "Navigation" | "Projects" | "Actions" | "Socials" | "Help";
   label: string;
   desc?: string;
   icon: React.ElementType;
   badge?: string;
+  keywords?: string[];
   action: () => void;
 }
 
@@ -46,6 +50,7 @@ export default function CommandPalette({
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { theme, toggleTheme } = useTheme();
   const { soundEnabled, toggleSound, playKey, playClick, playSuccess } = useSound();
@@ -72,6 +77,21 @@ export default function CommandPalette({
 
   // Commands Registry
   const commands: CommandItem[] = [
+    // Help & Manual
+    {
+      id: "cmd-help",
+      category: "Help",
+      label: "help",
+      desc: "CLI manual, keyboard shortcuts, and command index",
+      icon: HelpCircle,
+      badge: "MANUAL",
+      keywords: ["help", "?", "man", "shortcuts", "keys", "commands", "guide", "info", "usage"],
+      action: () => {
+        playClick();
+        setShowHelp(true);
+      },
+    },
+
     // Navigation
     {
       id: "nav-hero",
@@ -220,15 +240,25 @@ export default function CommandPalette({
   ];
 
   // Filter commands by query
-  const filtered = commands.filter((cmd) => {
-    if (!query) return true;
-    const q = query.toLowerCase();
-    return (
-      cmd.label.toLowerCase().includes(q) ||
-      (cmd.desc && cmd.desc.toLowerCase().includes(q)) ||
-      cmd.category.toLowerCase().includes(q)
-    );
-  });
+  const filtered = commands
+    .filter((cmd) => {
+      if (!query) return true;
+      const q = query.toLowerCase().trim();
+      return (
+        cmd.label.toLowerCase().includes(q) ||
+        (cmd.desc && cmd.desc.toLowerCase().includes(q)) ||
+        cmd.category.toLowerCase().includes(q) ||
+        (cmd.keywords && cmd.keywords.some((k) => k.toLowerCase().includes(q)))
+      );
+    })
+    .sort((a, b) => {
+      const q = query.toLowerCase().trim();
+      if (q === "help" || q === "?") {
+        if (a.id === "cmd-help") return -1;
+        if (b.id === "cmd-help") return 1;
+      }
+      return 0;
+    });
 
   // Keep index within bounds
   useEffect(() => {
@@ -241,11 +271,20 @@ export default function CommandPalette({
       setTimeout(() => inputRef.current?.focus(), 50);
       setQuery("");
       setSelectedIndex(0);
+      setShowHelp(false);
     }
   }, [isOpen]);
 
   // Keyboard navigation within palette
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (showHelp) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        playClick();
+        setShowHelp(false);
+        return;
+      }
+    }
     if (e.key === "ArrowDown") {
       e.preventDefault();
       playKey();
@@ -312,89 +351,227 @@ export default function CommandPalette({
                 onChange={(e) => {
                   setQuery(e.target.value);
                   playKey();
+                  if (showHelp) setShowHelp(false);
                 }}
                 onKeyDown={handleKeyDown}
-                placeholder="Type a command, project, or section name..."
+                placeholder={showHelp ? "Type to search or ESC to return..." : "Type a command, project, or 'help'..."}
                 aria-label="Command search"
                 className="flex-1 bg-transparent border-none outline-none text-sm font-mono text-fg placeholder:text-fg-subtle/60"
                 autoComplete="off"
                 spellCheck="false"
               />
-              {query && (
-                <button
-                  onClick={() => setQuery("")}
-                  className="text-[10px] font-mono text-fg-subtle hover:text-fg"
-                >
-                  CLEAR
-                </button>
-              )}
+              <div className="flex items-center gap-2">
+                {!showHelp ? (
+                  <button
+                    onClick={() => {
+                      playClick();
+                      setShowHelp(true);
+                    }}
+                    className="px-2 py-0.5 rounded text-[10px] font-mono text-fg-subtle hover:text-editorial-accent bg-canvas border border-editorial-border hover:border-editorial-accent transition-colors flex items-center gap-1"
+                    title="Open CLI Manual"
+                  >
+                    <HelpCircle className="w-3 h-3" />
+                    <span>HELP</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      playClick();
+                      setShowHelp(false);
+                    }}
+                    className="px-2 py-0.5 rounded text-[10px] font-mono text-editorial-accent bg-canvas border border-editorial-accent transition-colors flex items-center gap-1"
+                  >
+                    <span>← LIST</span>
+                  </button>
+                )}
+                {query && (
+                  <button
+                    onClick={() => setQuery("")}
+                    className="text-[10px] font-mono text-fg-subtle hover:text-fg"
+                  >
+                    CLEAR
+                  </button>
+                )}
+              </div>
             </div>
 
-            {/* Results List */}
-            <div className="max-h-[380px] overflow-y-auto p-2 space-y-1 select-none">
-              {filtered.length === 0 ? (
-                <div className="py-12 text-center text-xs font-mono text-fg-subtle space-y-1">
-                  <p>No commands or projects matching &ldquo;{query}&rdquo;</p>
-                  <p className="text-[11px] text-fg-subtle/70">Try searching &ldquo;Vaani&rdquo;, &ldquo;Email&rdquo;, or &ldquo;Experience&rdquo;</p>
+            {/* Main Stage: Help Manual OR Results List */}
+            {showHelp ? (
+              <div className="max-h-[380px] overflow-y-auto p-4 sm:p-5 space-y-5 font-mono text-xs select-none">
+                {/* Header */}
+                <div className="flex items-center justify-between pb-3 border-b border-editorial-border/60">
+                  <div className="space-y-0.5">
+                    <p className="text-editorial-accent font-bold text-xs flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5" />
+                      <span>MANUAL PAGE: arjun-cli(1)</span>
+                    </p>
+                    <p className="text-[11px] text-fg-subtle">
+                      Command index, shortcuts &amp; terminal manual
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      playClick();
+                      setShowHelp(false);
+                    }}
+                    className="px-2.5 py-1 rounded bg-canvas hover:bg-canvas-subtle border border-editorial-border text-[11px] text-fg-muted hover:text-fg transition-colors"
+                  >
+                    ← Back to Commands
+                  </button>
                 </div>
-              ) : (
-                filtered.map((item, idx) => {
-                  const Icon = item.icon;
-                  const isSelected = idx === selectedIndex;
 
-                  return (
-                    <div
-                      key={item.id}
-                      onClick={item.action}
-                      onMouseEnter={() => setSelectedIndex(idx)}
-                      className={`group flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all ${
-                        isSelected
-                          ? "bg-canvas-subtle border border-editorial-accent/30 text-fg shadow-xs"
-                          : "text-fg-muted hover:bg-canvas-subtle/60 border border-transparent"
-                      }`}
-                    >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div
-                          className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                            isSelected
-                              ? "bg-editorial-accent/15 text-editorial-accent"
-                              : "bg-canvas border border-editorial-border text-fg-subtle"
-                          }`}
-                        >
-                          <Icon className="w-3.5 h-3.5" />
-                        </div>
-
-                        <div className="min-w-0">
-                          <p className={`text-xs font-medium truncate ${isSelected ? "text-fg" : "text-fg-muted"}`}>
-                            {item.label}
-                          </p>
-                          {item.desc && (
-                            <p className="text-[11px] text-fg-subtle truncate font-light">
-                              {item.desc}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2 shrink-0 ml-3">
-                        {item.badge && (
-                          <span className="text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-canvas border border-editorial-border text-fg-subtle">
-                            {item.badge}
-                          </span>
-                        )}
-                        <span
-                          className={`text-[10px] font-mono transition-opacity ${
-                            isSelected ? "opacity-100 text-editorial-accent" : "opacity-0"
-                          }`}
-                        >
-                          ↵
-                        </span>
-                      </div>
+                {/* Section 1: Keyboard Shortcuts */}
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-1.5 text-fg font-semibold text-[11px] uppercase tracking-wider">
+                    <Keyboard className="w-3.5 h-3.5 text-editorial-accent" />
+                    <span>01 / GLOBAL KEYBOARD SHORTCUTS</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-canvas border border-editorial-border/60">
+                      <span className="text-fg-muted">Command Palette</span>
+                      <kbd className="px-2 py-0.5 rounded bg-canvas-subtle border border-editorial-border text-editorial-accent font-semibold">⌘K / Ctrl+K</kbd>
                     </div>
-                  );
-                })
-              )}
-            </div>
+                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-canvas border border-editorial-border/60">
+                      <span className="text-fg-muted">Navigate Results</span>
+                      <kbd className="px-2 py-0.5 rounded bg-canvas-subtle border border-editorial-border text-editorial-accent font-semibold">↑ / ↓</kbd>
+                    </div>
+                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-canvas border border-editorial-border/60">
+                      <span className="text-fg-muted">Execute Selected</span>
+                      <kbd className="px-2 py-0.5 rounded bg-canvas-subtle border border-editorial-border text-editorial-accent font-semibold">↵ Enter</kbd>
+                    </div>
+                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-canvas border border-editorial-border/60">
+                      <span className="text-fg-muted">Close / Return</span>
+                      <kbd className="px-2 py-0.5 rounded bg-canvas-subtle border border-editorial-border text-editorial-accent font-semibold">ESC</kbd>
+                    </div>
+                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-canvas border border-editorial-border/60">
+                      <span className="text-fg-muted">Rotate 3D Carousel</span>
+                      <kbd className="px-2 py-0.5 rounded bg-canvas-subtle border border-editorial-border text-editorial-accent font-semibold">← / →</kbd>
+                    </div>
+                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-canvas border border-editorial-border/60">
+                      <span className="text-fg-muted">View Case Study</span>
+                      <span className="text-editorial-accent text-[10px] font-semibold">Click / ↵</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section 2: Command Keywords */}
+                <div className="space-y-2.5">
+                  <div className="text-fg font-semibold text-[11px] uppercase tracking-wider">
+                    <span>02 / PALETTE COMMANDS &amp; KEYWORDS</span>
+                  </div>
+                  <div className="space-y-1.5 text-[11px]">
+                    <div className="p-2 rounded-lg bg-canvas border border-editorial-border/60 flex items-start gap-2.5">
+                      <code className="text-editorial-accent font-bold shrink-0">help, ?</code>
+                      <span className="text-fg-muted">Displays this manual page and shortcut guide.</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-canvas border border-editorial-border/60 flex items-start gap-2.5">
+                      <code className="text-editorial-accent font-bold shrink-0">01 … 08</code>
+                      <span className="text-fg-muted">Opens deep case study modal for any project (e.g. LearnLoop, Vaani, EMP).</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-canvas border border-editorial-border/60 flex items-start gap-2.5">
+                      <code className="text-editorial-accent font-bold shrink-0">hero, exp, work, about, contact</code>
+                      <span className="text-fg-muted">Instantly smooth-scrolls to the target portfolio chapter.</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-canvas border border-editorial-border/60 flex items-start gap-2.5">
+                      <code className="text-editorial-accent font-bold shrink-0">email, copy</code>
+                      <span className="text-fg-muted">Copies arjun.chaudhary3105@gmail.com directly to clipboard.</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-canvas border border-editorial-border/60 flex items-start gap-2.5">
+                      <code className="text-editorial-accent font-bold shrink-0">theme, sound</code>
+                      <span className="text-fg-muted">Toggles Dark/Light theme or Web Audio tactile click feedback.</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section 3: Interactive Shell in About */}
+                <div className="space-y-2.5">
+                  <div className="text-fg font-semibold text-[11px] uppercase tracking-wider">
+                    <span>03 / IN-PAGE INTERACTIVE SHELL (CHAPTER 04)</span>
+                  </div>
+                  <p className="text-[11px] text-fg-muted leading-relaxed">
+                    The embedded terminal in the About section accepts standard Linux-like commands:
+                  </p>
+                  <div className="p-3 rounded-lg bg-canvas border border-editorial-border/60 grid grid-cols-2 gap-2 text-[11px]">
+                    <div><span className="text-emerald-500 font-bold">whoami</span> — Quick intro &amp; bio</div>
+                    <div><span className="text-emerald-500 font-bold">skills</span> — Tech stack breakdown</div>
+                    <div><span className="text-emerald-500 font-bold">stats</span> — 400+ DSA, 9.5 CGPA</div>
+                    <div><span className="text-emerald-500 font-bold">experience</span> — Production roles</div>
+                    <div><span className="text-emerald-500 font-bold">projects</span> — Flagship builds</div>
+                    <div><span className="text-emerald-500 font-bold">contact</span> — Reach out</div>
+                    <div><span className="text-emerald-500 font-bold">clear</span> — Wipe screen</div>
+                    <div><span className="text-emerald-500 font-bold">help</span> — Command list</div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Results List */
+              <div className="max-h-[380px] overflow-y-auto p-2 space-y-1 select-none">
+                {filtered.length === 0 ? (
+                  <div className="py-12 text-center text-xs font-mono text-fg-subtle space-y-1">
+                    <p>No commands or projects matching &ldquo;{query}&rdquo;</p>
+                    <p className="text-[11px] text-fg-subtle/70">
+                      Type &ldquo;help&rdquo; to view the manual or try &ldquo;Vaani&rdquo;, &ldquo;Email&rdquo;
+                    </p>
+                  </div>
+                ) : (
+                  filtered.map((item, idx) => {
+                    const Icon = item.icon;
+                    const isSelected = idx === selectedIndex;
+
+                    return (
+                      <div
+                        key={item.id}
+                        onClick={item.action}
+                        onMouseEnter={() => setSelectedIndex(idx)}
+                        className={`group flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all ${
+                          isSelected
+                            ? "bg-canvas-subtle border border-editorial-accent/30 text-fg shadow-xs"
+                            : "text-fg-muted hover:bg-canvas-subtle/60 border border-transparent"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div
+                            className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                              isSelected
+                                ? "bg-editorial-accent/15 text-editorial-accent"
+                                : "bg-canvas border border-editorial-border text-fg-subtle"
+                            }`}
+                          >
+                            <Icon className="w-3.5 h-3.5" />
+                          </div>
+
+                          <div className="min-w-0">
+                            <p className={`text-xs font-medium truncate ${isSelected ? "text-fg" : "text-fg-muted"}`}>
+                              {item.label}
+                            </p>
+                            {item.desc && (
+                              <p className="text-[11px] text-fg-subtle truncate font-light">
+                                {item.desc}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 shrink-0 ml-3">
+                          {item.badge && (
+                            <span className="text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-canvas border border-editorial-border text-fg-subtle">
+                              {item.badge}
+                            </span>
+                          )}
+                          <span
+                            className={`text-[10px] font-mono transition-opacity ${
+                              isSelected ? "opacity-100 text-editorial-accent" : "opacity-0"
+                            }`}
+                          >
+                            ↵
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            )}
 
             {/* Bottom Keyboard Hint Bar */}
             <div className="px-4 py-2.5 bg-canvas-subtle/60 border-t border-editorial-border flex items-center justify-between text-[10px] font-mono text-fg-subtle">
@@ -407,6 +584,11 @@ export default function CommandPalette({
                 <span className="flex items-center gap-1">
                   <kbd className="px-1.5 py-0.5 rounded bg-canvas border border-editorial-border">↵</kbd>
                   <span>select</span>
+                </span>
+                <span className="hidden sm:inline-flex items-center gap-1 text-fg-subtle/80">
+                  <span>type</span>
+                  <kbd className="px-1.5 py-0.5 rounded bg-canvas border border-editorial-border text-editorial-accent font-semibold">help</kbd>
+                  <span>for manual</span>
                 </span>
               </div>
               <span className="text-editorial-accent">CLI COMMAND PALETTE</span>

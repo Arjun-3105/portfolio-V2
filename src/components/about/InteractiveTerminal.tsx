@@ -194,7 +194,7 @@ export default function InteractiveTerminal() {
     }
   };
 
-  const quickChips = ["whoami", "skills", "stats", "experience", "projects", "contact", "clear"];
+  const quickChips = ["help", "whoami", "skills", "stats", "experience", "projects", "contact", "clear"];
 
   return (
     <div className="rounded-2xl border border-editorial-border bg-canvas-card overflow-hidden shadow-sm hover:border-editorial-accent/30 transition-all duration-300">
