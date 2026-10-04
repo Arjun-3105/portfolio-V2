@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { projects, Project } from "@/data/projects";
 import CaseStudyModal from "./CaseStudyModal";
+import { useSound } from "@/context/SoundContext";
 import {
   ArrowUpRight,
   ChevronLeft,
@@ -17,17 +18,20 @@ import {
 } from "lucide-react";
 
 export default function SelectedWork() {
+  const { playTick, playClick } = useSound();
   const [activeIndex, setActiveIndex] = useState(2); // Default to Vaani (03)
   const [modalProjectId, setModalProjectId] = useState<string | null>(null);
   const total = projects.length;
 
   const handleNext = useCallback(() => {
+    playTick();
     setActiveIndex((prev) => (prev + 1) % total);
-  }, [total]);
+  }, [total, playTick]);
 
   const handlePrev = useCallback(() => {
+    playTick();
     setActiveIndex((prev) => (prev - 1 + total) % total);
-  }, [total]);
+  }, [total, playTick]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -137,7 +141,10 @@ export default function SelectedWork() {
               <motion.div
                 key={project.id}
                 onClick={() => {
-                  if (!isCenter) setActiveIndex(index);
+                  if (!isCenter) {
+                    playTick();
+                    setActiveIndex(index);
+                  }
                 }}
                 animate={{
                   x: xOffset,
@@ -233,6 +240,7 @@ export default function SelectedWork() {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
+                        playClick();
                         setModalProjectId(project.id);
                       }}
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fg text-canvas text-xs uppercase font-mono tracking-editorial font-medium hover:opacity-90 transition-all active:scale-95 shadow-sm"
@@ -276,7 +284,10 @@ export default function SelectedWork() {
             {projects.map((p, idx) => (
               <button
                 key={p.id}
-                onClick={() => setActiveIndex(idx)}
+                onClick={() => {
+                  playTick();
+                  setActiveIndex(idx);
+                }}
                 className={`transition-all duration-300 rounded-full ${
                   idx === activeIndex
                     ? "w-8 h-2 bg-editorial-accent shadow-[0_0_8px_var(--accent)]"

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { useSound } from "@/context/SoundContext";
 import { Terminal as TerminalIcon, Sparkles, Play, RotateCcw } from "lucide-react";
 
 interface CommandOutput {
@@ -9,6 +10,7 @@ interface CommandOutput {
 }
 
 export default function InteractiveTerminal() {
+  const { playKey, playClick, playSuccess } = useSound();
   const [inputVal, setInputVal] = useState("");
   const [history, setHistory] = useState<CommandOutput[]>([
     {
@@ -38,6 +40,7 @@ export default function InteractiveTerminal() {
   }, [history]);
 
   const handleCommand = (rawCmd: string) => {
+    playClick();
     const cmd = rawCmd.trim().toLowerCase();
     if (!cmd) return;
 
@@ -237,7 +240,10 @@ export default function InteractiveTerminal() {
             ref={inputRef}
             type="text"
             value={inputVal}
-            onChange={(e) => setInputVal(e.target.value)}
+            onChange={(e) => {
+              setInputVal(e.target.value);
+              playKey();
+            }}
             onKeyDown={handleKeyDown}
             placeholder="type 'help' or click a command..."
             aria-label="Terminal command input"

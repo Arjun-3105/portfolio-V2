@@ -52,6 +52,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { SoundProvider } from "@/context/SoundContext";
+import CursorSpotlight from "@/components/ui/CursorSpotlight";
+
 export default function RootLayout({
   children,
 }: {
@@ -63,8 +66,11 @@ export default function RootLayout({
         className={`${newsreader.variable} ${jakarta.variable} font-sans min-h-screen relative antialiased selection:bg-accent selection:text-white`}
       >
         <ThemeProvider>
-          <div className="paper-grain" aria-hidden="true" />
-          {children}
+          <SoundProvider>
+            <div className="paper-grain" aria-hidden="true" />
+            <CursorSpotlight />
+            {children}
+          </SoundProvider>
         </ThemeProvider>
       </body>
     </html>
