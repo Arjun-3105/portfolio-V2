@@ -32,11 +32,16 @@ export default function InteractiveTerminal() {
   ]);
   const [commandHistory, setCommandHistory] = useState<string[]>(["whoami"]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const terminalBottomRef = useRef<HTMLDivElement>(null);
+  const terminalBodyRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    terminalBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTo({
+        top: terminalBodyRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }, [history]);
 
   const handleCommand = (rawCmd: string) => {
@@ -171,6 +176,7 @@ export default function InteractiveTerminal() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       handleCommand(inputVal);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
@@ -218,6 +224,7 @@ export default function InteractiveTerminal() {
 
       {/* Terminal Body */}
       <div
+        ref={terminalBodyRef}
         onClick={() => inputRef.current?.focus()}
         className="p-5 max-h-[360px] min-h-[260px] overflow-y-auto space-y-4 font-mono text-xs cursor-text bg-canvas/40"
       >
@@ -252,7 +259,6 @@ export default function InteractiveTerminal() {
             spellCheck="false"
           />
         </div>
-        <div ref={terminalBottomRef} />
       </div>
 
       {/* Quick Interactive Command Buttons */}
