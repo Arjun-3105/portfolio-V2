@@ -17,6 +17,8 @@
   --card-border: rgba(19, 20, 23, 0.08);
   --accent: #8E6A3E;
   --accent-glow: rgba(142, 106, 62, 0.12);
+  --spotlight-core: rgba(142, 106, 62, 0.15);
+  --spotlight-color: rgba(142, 106, 62, 0.06);
   --noise-opacity: 0.035;
 }
 
@@ -35,6 +37,8 @@
   --card-border: rgba(255, 255, 255, 0.09);
   --accent: #E0A96D;
   --accent-glow: rgba(224, 169, 109, 0.18);
+  --spotlight-core: rgba(224, 169, 109, 0.22);
+  --spotlight-color: rgba(224, 169, 109, 0.09);
   --noise-opacity: 0.045;
 }
 

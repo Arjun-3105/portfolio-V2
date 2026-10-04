@@ -37,7 +37,7 @@ export default function CursorSpotlight() {
     <div
       className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
       style={{
-        background: `radial-gradient(650px circle at ${pos.x}px ${pos.y}px, var(--spotlight-color, rgba(217, 119, 6, 0.05)), transparent 70%)`,
+        background: `radial-gradient(600px circle at ${pos.x}px ${pos.y}px, var(--spotlight-core, rgba(224, 169, 109, 0.22)) 0%, var(--spotlight-color, rgba(224, 169, 109, 0.09)) 35%, transparent 72%)`,
       }}
       aria-hidden="true"
     />
