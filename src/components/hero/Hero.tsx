@@ -62,10 +62,10 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
         <div className="lg:col-span-5 flex flex-col justify-center space-y-7 z-10">
           <div className="space-y-1">
             <p className="text-[11px] font-mono tracking-editorial uppercase text-fg-subtle">
-              COMPUTER SCIENCE STUDENT
+              BACKEND &amp; SYSTEMS ENGINEER
             </p>
             <p className="text-[11px] font-mono tracking-editorial uppercase text-fg-subtle">
-              BUILDER · LEARNER · CURIOUS HUMAN
+              BUILDER · DEVELOPER · ALWAYS LEARNING
             </p>
           </div>
 
@@ -76,7 +76,7 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
           </h1>
 
           <p className="text-sm sm:text-base text-fg-muted font-light leading-relaxed max-w-md">
-            I&apos;m Arjun — a computer science student at Bennett University and backend intern at WhatBytes. I engineer high-throughput scraping pipelines, distributed task queues with Celery &amp; Redis, and low-latency voice RAG.
+            I&apos;m Arjun — a backend engineer and builder currently interning at WhatBytes. I engineer high-throughput scraping pipelines, distributed task queues with Celery &amp; Redis, and low-latency voice RAG.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-4">

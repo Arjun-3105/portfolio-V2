@@ -158,7 +158,7 @@ export default function ContactSection() {
           </div>
 
           <div className="flex items-center gap-2">
-            <span>STUDENT</span>
+            <span>ENGINEER</span>
             <span>/</span>
             <span>BUILDER</span>
             <span>/</span>

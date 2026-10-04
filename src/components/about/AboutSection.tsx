@@ -32,7 +32,7 @@ export default function AboutSection() {
           <div className="lg:col-span-6 space-y-6">
             <div className="space-y-4 text-fg-muted font-light leading-relaxed text-sm sm:text-base">
               <p className="text-fg font-normal">
-                Hey, I&apos;m Arjun. I&apos;m a 3rd-year Computer Science undergraduate at Bennett University and a Full Stack / Backend Developer Intern at WhatBytes.
+                Hey, I&apos;m Arjun. I&apos;m a software engineer and builder, currently working as a Full Stack / Backend Developer Intern at WhatBytes.
               </p>
               <p>
                 Most of my engineering revolves around backend systems, asynchronous task queues with Celery &amp; Redis, web scraping pipelines, and domain-grounded retrieval (RAG). I like building tools that are fast, deterministic, and handle messy real-world data without breaking.
@@ -51,7 +51,7 @@ export default function AboutSection() {
                 </div>
                 <p className="text-xs font-semibold text-fg">B.Tech in Computer Science</p>
                 <p className="text-[11px] text-fg-muted">
-                  Bennett University (2023–2027) · <span className="text-editorial-accent font-medium">CGPA 9.5</span>
+                  Bennett University · <span className="text-editorial-accent font-medium">CGPA 9.5</span> (Dean&apos;s List)
                 </p>
               </div>
 

@@ -16,7 +16,7 @@ export default function InteractiveTerminal() {
       output: (
         <div className="space-y-1 text-fg-muted font-mono text-[11px] leading-relaxed">
           <p>
-            <span className="text-editorial-accent font-semibold">Arjun Chaudhary</span> — Computer Science undergrad at Bennett University (2023–2027).
+            <span className="text-editorial-accent font-semibold">Arjun Chaudhary</span> — Backend Engineer &amp; Builder.
           </p>
           <p>
             Currently a <span className="text-fg font-medium">Backend / Full Stack Intern at WhatBytes</span>, building asynchronous task queues, high-throughput scrapers, and content ranking logic.
@@ -68,9 +68,9 @@ export default function InteractiveTerminal() {
         outputNode = (
           <div className="space-y-1 text-fg-muted font-mono text-[11px] leading-relaxed">
             <p>
-              <span className="text-editorial-accent font-semibold">Arjun Chaudhary</span> (CS Undergrad @ Bennett University, 2023–2027)
+              <span className="text-editorial-accent font-semibold">Arjun Chaudhary</span> (Backend &amp; Systems Engineer)
             </p>
-            <p>Backend &amp; Systems Engineer · CGPA: 9.5 / 10 · Dean&apos;s List (Top 5%)</p>
+            <p>Engineer &amp; Builder · CGPA: 9.5 / 10 · Dean&apos;s List (Top 5%)</p>
             <p>Focus: Distributed queues (Celery/Redis), high-throughput web scraping, and low-latency voice &amp; vector retrieval.</p>
           </div>
         );

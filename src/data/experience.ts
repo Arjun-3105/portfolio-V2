@@ -85,7 +85,7 @@ export const educationInfo = {
   institution: "Bennett University",
   location: "Greater Noida, India",
   degree: "Bachelor of Technology in Computer Science",
-  period: "2023 – 2027",
+  period: "Academic Honors",
   cgpa: "9.5 / 10",
   standing: "Top 5%",
   honors: "Dean's List for Academic Excellence",

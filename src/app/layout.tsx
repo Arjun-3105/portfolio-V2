@@ -19,12 +19,14 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Arjun Chaudhary — Ideas into a kinder internet",
+  title: "Arjun Chaudhary — Software Engineer & Builder",
   description:
-    "Personal portfolio of Arjun Chaudhary. A computer science student who builds AI products, full-stack systems, and tools around learning, information, and the internet.",
+    "Personal portfolio of Arjun Chaudhary — Software engineer and builder. Developing backend systems, distributed pipelines, and practical AI tools.",
   keywords: [
     "Arjun Chaudhary",
-    "AI Engineer",
+    "Software Engineer",
+    "Backend Developer",
+    "Builder",
     "Full-Stack Developer",
     "NoteStamp",
     "LearnLoop",
@@ -43,9 +45,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Arjun Chaudhary" }],
   openGraph: {
-    title: "Arjun Chaudhary — Ideas into a kinder internet",
+    title: "Arjun Chaudhary — Software Engineer & Builder",
     description:
-      "A computer science student who builds AI products, full-stack systems, and tools around learning, information, and the internet.",
+      "Software engineer and builder developing backend systems, distributed pipelines, and practical AI tools.",
     type: "website",
   },
 };
