@@ -165,9 +165,8 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
                 <span className="text-[9px] font-mono uppercase tracking-ultrawide text-white/80 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
                   {theme === "dark" ? "HORIZON • 01" : "PORTAL • 01"}
                 </span>
-                <span className="text-[9px] font-mono tracking-widest text-white/70 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full flex items-center gap-1">
-                  <Sparkles className="w-2.5 h-2.5 text-amber-300" />
-                  <span>INTERACTIVE</span>
+                <span className="text-[9px] font-mono tracking-widest text-white/70 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full">
+                  BUILDER ARCHIVE
                 </span>
               </div>
 
