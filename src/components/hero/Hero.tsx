@@ -70,13 +70,13 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
           </div>
 
           <h1 className="editorial-headline text-5xl sm:text-6xl md:text-7xl lg:text-[4.2rem] text-fg leading-[1.04] tracking-tight">
-            Ideas <br />
-            into a <span className="editorial-italic font-normal text-editorial-accent">kinder</span> <br />
-            internet<span className="text-editorial-accent">.</span>
+            Building <br />
+            software that <span className="editorial-italic font-normal text-editorial-accent">actually</span> <br />
+            works<span className="text-editorial-accent">.</span>
           </h1>
 
           <p className="text-sm sm:text-base text-fg-muted font-light leading-relaxed max-w-md">
-            I&apos;m Arjun — a computer science student at Bennett University who builds AI products, full-stack systems, and thoughtful tools around learning, information, and the internet.
+            I&apos;m Arjun — a computer science student at Bennett University and backend intern at WhatBytes. I engineer high-throughput scraping pipelines, distributed task queues with Celery &amp; Redis, and low-latency voice RAG.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -103,7 +103,7 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
           <div className="pt-6 border-t border-editorial-border/60 grid grid-cols-2 gap-4 max-w-sm">
             <div>
               <p className="text-[10px] font-mono uppercase tracking-ultrawide text-fg-subtle">FOCUS</p>
-              <p className="text-xs text-fg mt-0.5 font-medium">Distributed AI &amp; RAG</p>
+              <p className="text-xs text-fg mt-0.5 font-medium">Backend &amp; Distributed Queues</p>
             </div>
             <div>
               <p className="text-[10px] font-mono uppercase tracking-ultrawide text-fg-subtle">ACADEMICS</p>
@@ -171,11 +171,11 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
                 </span>
               </div>
 
-              {/* Silhouette Narrative Caption at Base */}
+              {/* Telemetry Caption at Base */}
               <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 text-white pointer-events-none">
-                <p className="text-[10px] font-mono uppercase tracking-ultrawide text-stone-300">PERSPECTIVE</p>
+                <p className="text-[10px] font-mono uppercase tracking-ultrawide text-stone-300">SYSTEM ARCHITECTURE</p>
                 <p className="editorial-italic text-sm text-stone-100 mt-0.5">
-                  &ldquo;A more curious, human internet.&rdquo;
+                  &ldquo;Distributed queues, low latency, calm software.&rdquo;
                 </p>
               </div>
             </div>
@@ -241,13 +241,13 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
             </div>
           </div>
 
-          {/* Editorial Thought Snippet */}
+          {/* Real Work Quote / Stat */}
           <div className="p-4 rounded-xl border border-editorial-border bg-canvas-card/60 backdrop-blur-sm space-y-2">
             <p className="text-[10px] font-mono uppercase tracking-ultrawide text-fg-subtle">
-              BETTER TOOLS · BRIGHTER PEOPLE
+              BACKEND PHILOSOPHY
             </p>
-            <p className="text-xs text-fg-muted font-light italic leading-relaxed">
-              &ldquo;Software shouldn&apos;t shout. The best tools feel invisible, amplifying human thought without stealing it.&rdquo;
+            <p className="text-xs text-fg-muted font-light leading-relaxed">
+              &ldquo;Good backend architecture doesn&apos;t shout. It handles thousands of asynchronous jobs quietly and fails gracefully.&rdquo;
             </p>
           </div>
         </div>
