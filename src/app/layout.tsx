@@ -50,6 +50,15 @@ export const metadata: Metadata = {
       "Software engineer and builder developing backend systems, distributed pipelines, and practical AI tools.",
     type: "website",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-icon", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 import { SoundProvider } from "@/context/SoundContext";

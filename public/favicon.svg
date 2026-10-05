@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Dark Editorial Canvas Squircle -->
+  <rect width="64" height="64" rx="16" fill="#0B0C0E"/>
+  <rect width="62" height="62" x="1" y="1" rx="15" stroke="#E0A96D" stroke-opacity="0.45" stroke-width="2"/>
+  
+  <!-- Architectural Monogram "A" -->
+  <path d="M20 44L28.6 19H35.4L44 44H38.5L36.6 38.2H27.4L25.5 44H20ZM29 33.6H35L32 24.2L29 33.6Z" fill="#EDECE8"/>
+  
+  <!-- Signature Editorial Amber Dot -->
+  <circle cx="47" cy="41" r="3.2" fill="#E0A96D"/>
+</svg>
