@@ -21,8 +21,18 @@ export default function SelectedWork() {
   const { playKey } = useSound();
   const [activeIndex, setActiveIndex] = useState(2); // Default to Vaani (03)
   const [modalProjectId, setModalProjectId] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const total = projects.length;
   const lastWheelTime = useRef<number>(0);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleNext = useCallback(() => {
     playKey();
@@ -46,6 +56,29 @@ export default function SelectedWork() {
       }
       lastWheelTime.current = now;
     }
+  };
+
+  // Mobile Touch Swipe Handling
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+
+    // Detect horizontal swipe while allowing normal vertical scrolling
+    if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1) {
+      if (deltaX < 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   // Keyboard navigation (horizontal arrow keys only, preserving vertical page scroll)
@@ -128,8 +161,10 @@ export default function SelectedWork() {
         {/* 3D Spatial Carousel Stage */}
         <div
           onWheel={handleStageWheel}
-          className="relative w-full h-[580px] sm:h-[640px] flex items-center justify-center select-none"
-          style={{ perspective: 1200 }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="relative w-full h-[580px] sm:h-[640px] flex items-center justify-center select-none touch-pan-y"
+          style={{ perspective: 1200, touchAction: "pan-y" }}
         >
           {projects.map((project, index) => {
             // Calculate circular offset relative to active index
@@ -143,8 +178,8 @@ export default function SelectedWork() {
             if (!isVisible) return null;
 
             // 3D positioning calculations
-            const xOffset = diff * 320; // horizontal separation
-            const zOffset = -Math.abs(diff) * 160; // depth separation
+            const xOffset = diff * (isMobile ? 220 : 320); // responsive horizontal separation
+            const zOffset = -Math.abs(diff) * (isMobile ? 120 : 160); // depth separation
             const rotateY = diff * -24; // 3D yaw angle
             const scale = isCenter ? 1 : Math.max(0.72, 1 - Math.abs(diff) * 0.16);
             const opacity = isCenter ? 1 : Math.max(0.35, 1 - Math.abs(diff) * 0.4);
@@ -179,6 +214,7 @@ export default function SelectedWork() {
                   zIndex: zIndex,
                   transformStyle: "preserve-3d",
                   cursor: isCenter ? "default" : "pointer",
+                  touchAction: "pan-y",
                 }}
                 className={`w-[90vw] max-w-[560px] sm:max-w-[660px] rounded-3xl border bg-canvas-card overflow-hidden shadow-2xl transition-colors duration-300 ${
                   isCenter
