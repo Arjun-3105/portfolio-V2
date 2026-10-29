@@ -15,6 +15,8 @@ import {
   TrendingUp,
   Cpu,
   Layers,
+  FileText,
+  ArrowUpRight,
 } from "lucide-react";
 
 export default function ExperienceSection() {
@@ -63,9 +65,22 @@ export default function ExperienceSection() {
                 Engineering production backends, asynchronous worker pipelines, and scalable APIs.
               </p>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-fg-subtle border border-editorial-border px-3.5 py-1.5 rounded-full bg-canvas-card shadow-sm">
-              <Briefcase className="w-3.5 h-3.5 text-editorial-accent" />
-              <span>PRODUCTION ROLES</span>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 text-xs font-mono text-fg hover:text-editorial-accent border border-editorial-border hover:border-editorial-accent px-3.5 py-1.5 rounded-full bg-canvas-card shadow-sm transition-all"
+              >
+                <FileText className="w-3.5 h-3.5 text-editorial-accent" />
+                <span>RESUME (PDF)</span>
+                <ArrowUpRight className="w-3 h-3 text-fg-subtle group-hover:text-editorial-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+
+              <div className="flex items-center gap-2 text-xs font-mono text-fg-subtle border border-editorial-border px-3.5 py-1.5 rounded-full bg-canvas-card shadow-sm">
+                <Briefcase className="w-3.5 h-3.5 text-editorial-accent" />
+                <span>PRODUCTION ROLES</span>
+              </div>
             </div>
           </div>
         </div>

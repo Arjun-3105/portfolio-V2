@@ -166,6 +166,34 @@ export default function CommandPalette({
 
     // Actions & Tools
     {
+      id: "act-resume",
+      category: "Actions",
+      label: "Open Resume (PDF)",
+      desc: "Arjun Chaudhary · Backend & Systems Engineer Resume",
+      icon: FileText,
+      badge: "PDF",
+      keywords: ["resume", "cv", "curriculum vitae", "pdf", "profile", "bio", "hire", "background"],
+      action: () => {
+        playClick();
+        window.open("/resume.pdf", "_blank");
+        onClose();
+      },
+    },
+    {
+      id: "act-resume-drive",
+      category: "Actions",
+      label: "View Resume on Google Drive",
+      desc: "drive.google.com/file/d/1lKIyUldZqYB-vqjWUxCE5TK4yIniwEt8",
+      icon: ExternalLink,
+      badge: "GDRIVE",
+      keywords: ["resume", "google drive", "drive", "cv", "pdf", "link"],
+      action: () => {
+        playClick();
+        window.open("https://drive.google.com/file/d/1lKIyUldZqYB-vqjWUxCE5TK4yIniwEt8/view?usp=sharing", "_blank");
+        onClose();
+      },
+    },
+    {
       id: "act-copy-email",
       category: "Actions",
       label: copied ? "Copied Email!" : "Copy Email Address",
@@ -474,6 +502,10 @@ export default function CommandPalette({
                       <span className="text-fg-muted">Instantly smooth-scrolls to the target portfolio chapter.</span>
                     </div>
                     <div className="p-2 rounded-lg bg-canvas border border-editorial-border/60 flex items-start gap-2.5">
+                      <code className="text-editorial-accent font-bold shrink-0">resume, cv</code>
+                      <span className="text-fg-muted">Opens Arjun&apos;s resume in a new tab (PDF or Google Drive).</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-canvas border border-editorial-border/60 flex items-start gap-2.5">
                       <code className="text-editorial-accent font-bold shrink-0">email, copy</code>
                       <span className="text-fg-muted">Copies arjun.chaudhary3105@gmail.com directly to clipboard.</span>
                     </div>
@@ -494,6 +526,7 @@ export default function CommandPalette({
                   </p>
                   <div className="p-3 rounded-lg bg-canvas border border-editorial-border/60 grid grid-cols-2 gap-2 text-[11px]">
                     <div><span className="text-emerald-500 font-bold">whoami</span> — Quick intro &amp; bio</div>
+                    <div><span className="text-emerald-500 font-bold">resume</span> — View resume (PDF)</div>
                     <div><span className="text-emerald-500 font-bold">skills</span> — Tech stack breakdown</div>
                     <div><span className="text-emerald-500 font-bold">stats</span> — Academics &amp; 9.5 CGPA</div>
                     <div><span className="text-emerald-500 font-bold">experience</span> — Production roles</div>

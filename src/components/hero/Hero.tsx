@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { useTheme } from "@/context/ThemeContext";
-import { ArrowRight, ArrowDown, ArrowUpRight, Briefcase, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowDown, ArrowUpRight, Briefcase, Sparkles, FileText } from "lucide-react";
 import { projects } from "@/data/projects";
 
 import { Compass } from "lucide-react";
@@ -97,6 +97,17 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
               <Briefcase className="w-3.5 h-3.5 text-editorial-accent" />
               <span>Experience</span>
             </button>
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-editorial-border hover:border-editorial-accent bg-canvas-card/60 hover:bg-canvas-card text-xs uppercase tracking-editorial text-fg font-medium transition-all duration-300"
+            >
+              <FileText className="w-3.5 h-3.5 text-editorial-accent" />
+              <span>Resume</span>
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-fg-subtle group-hover:text-editorial-accent" />
+            </a>
           </div>
 
           {/* Left bottom micro-story metadata */}

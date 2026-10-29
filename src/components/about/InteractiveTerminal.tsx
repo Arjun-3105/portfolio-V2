@@ -61,6 +61,7 @@ export default function InteractiveTerminal() {
             <p className="text-fg font-medium">Available commands:</p>
             <div className="grid grid-cols-2 gap-x-4 gap-y-1 pt-1">
               <div><span className="text-editorial-accent font-semibold">whoami</span> — Quick bio &amp; background</div>
+              <div><span className="text-editorial-accent font-semibold">resume</span> — View &amp; download resume</div>
               <div><span className="text-editorial-accent font-semibold">skills</span> — Languages &amp; tech stack</div>
               <div><span className="text-editorial-accent font-semibold">stats</span> — Academics &amp; problem solving</div>
               <div><span className="text-editorial-accent font-semibold">experience</span> — Internships &amp; work</div>
@@ -80,6 +81,35 @@ export default function InteractiveTerminal() {
             </p>
             <p>Engineer &amp; Builder · CGPA: 9.5 / 10 · Dean&apos;s List (Top 5%)</p>
             <p>Focus: Distributed queues (Celery/Redis), high-throughput web scraping, and low-latency voice &amp; vector retrieval.</p>
+          </div>
+        );
+        break;
+
+      case "resume":
+      case "cv":
+        outputNode = (
+          <div className="space-y-2 font-mono text-[11px] text-fg-muted">
+            <p className="text-fg font-medium">📄 <span className="text-editorial-accent font-semibold">Arjun Chaudhary</span> — Resume</p>
+            <p>Backend &amp; Systems Engineer · B.Tech CSE (CGPA 9.5 · Top 5%)</p>
+            <p>WhatBytes Intern (Django REST, Celery, Redis, Scrapy, Real-time WebSockets)</p>
+            <div className="flex flex-wrap items-center gap-2 pt-1.5">
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-editorial-accent/15 border border-editorial-accent/40 text-editorial-accent font-semibold hover:bg-editorial-accent/25 transition-colors"
+              >
+                <span>Open Resume (PDF) ↗</span>
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1lKIyUldZqYB-vqjWUxCE5TK4yIniwEt8/view?usp=sharing"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-canvas border border-editorial-border text-fg-muted hover:text-fg transition-colors"
+              >
+                <span>Google Drive ↗</span>
+              </a>
+            </div>
           </div>
         );
         break;
@@ -200,7 +230,7 @@ export default function InteractiveTerminal() {
     }
   };
 
-  const quickChips = ["help", "whoami", "skills", "stats", "experience", "projects", "contact", "clear"];
+  const quickChips = ["help", "resume", "whoami", "skills", "stats", "experience", "projects", "contact", "clear"];
 
   return (
     <div className="rounded-2xl border border-editorial-border bg-canvas-card overflow-hidden shadow-sm hover:border-editorial-accent/30 transition-all duration-300">

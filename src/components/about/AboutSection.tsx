@@ -2,7 +2,7 @@
 
 import React from "react";
 import InteractiveTerminal from "./InteractiveTerminal";
-import { GraduationCap, Briefcase, Award, Code2, Mail } from "lucide-react";
+import { GraduationCap, Briefcase, Award, Code2, Mail, FileText } from "lucide-react";
 
 export default function AboutSection() {
   return (
@@ -94,6 +94,16 @@ export default function AboutSection() {
               >
                 <Mail className="w-3.5 h-3.5" />
                 <span>Get in touch</span>
+              </a>
+
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-editorial-accent/60 bg-editorial-accent/10 hover:bg-editorial-accent/20 text-xs font-mono tracking-editorial text-editorial-accent transition-colors"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Resume (PDF) ↗</span>
               </a>
 
               <a

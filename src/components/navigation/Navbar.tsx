@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useSound } from "@/context/SoundContext";
-import { ArrowUpRight, Menu, X, Search, Volume2, VolumeX } from "lucide-react";
+import { ArrowUpRight, Menu, X, Search, Volume2, VolumeX, FileText } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Home", href: "#hero" },
@@ -112,6 +112,19 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
           {/* Dark / Light Theme Toggle */}
           <ThemeToggle />
 
+          {/* Resume Link */}
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group hidden lg:inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-editorial-border bg-canvas-card hover:bg-canvas-hover text-fg text-xs tracking-editorial uppercase transition-all duration-300"
+            aria-label="View Resume (PDF)"
+          >
+            <FileText className="w-3.5 h-3.5 text-editorial-accent" />
+            <span>Resume</span>
+            <ArrowUpRight className="w-3 h-3 text-fg-subtle group-hover:text-editorial-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+
           {/* Connect Action */}
           <a
             href="#contact"
@@ -170,6 +183,18 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
               {link.label}
             </a>
           ))}
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-between text-xs uppercase tracking-editorial text-fg font-medium py-1 border-b border-editorial-border/30"
+          >
+            <span className="flex items-center gap-2">
+              <FileText className="w-3.5 h-3.5 text-editorial-accent" />
+              <span>Resume (PDF)</span>
+            </span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-editorial-accent" />
+          </a>
           <a
             href="#contact"
             onClick={(e) => scrollToSection(e, "#contact")}
