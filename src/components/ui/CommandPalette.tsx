@@ -183,13 +183,13 @@ export default function CommandPalette({
       id: "act-resume-drive",
       category: "Actions",
       label: "View Resume on Google Drive",
-      desc: "drive.google.com/file/d/1lKIyUldZqYB-vqjWUxCE5TK4yIniwEt8",
+      desc: "drive.google.com/file/d/1S0h3VsgnqIvGnYXiby7LhHNqAUPalr_9",
       icon: ExternalLink,
       badge: "GDRIVE",
       keywords: ["resume", "google drive", "drive", "cv", "pdf", "link"],
       action: () => {
         playClick();
-        window.open("https://drive.google.com/file/d/1lKIyUldZqYB-vqjWUxCE5TK4yIniwEt8/view?usp=sharing", "_blank");
+        window.open("https://drive.google.com/file/d/1S0h3VsgnqIvGnYXiby7LhHNqAUPalr_9/view?usp=sharing", "_blank");
         onClose();
       },
     },

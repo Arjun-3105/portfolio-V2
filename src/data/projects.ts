@@ -31,118 +31,172 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "notestamp",
+    id: "mcp-observer",
     number: "01",
-    name: "LearnLoop",
-    tagline: "AI workspace for real learning and retention.",
+    name: "MCP-Observer",
+    tagline: "Distributed observability proxy for AI agent tool calls.",
     description:
-      "An intelligent workspace that transforms lectures, PDFs, and web articles into structured mental models, adaptive quizzes, and contextual notes with specialized cognitive modes.",
-    tags: ["AI WORKSPACE", "RAG", "EDTECH", "FULL-STACK"],
+      "A transparent OpenTelemetry proxy for Model Context Protocol (MCP) servers. Catches hung RPC requests, flags infinite retry loops within 60s windows, and exports spans & logs to SigNoz with 1-click correlation.",
+    tags: ["OPENTELEMETRY", "TYPESCRIPT", "SIGNOZ", "JSON-RPC"],
+    image: "/images/projects/mcp-preview.png",
+    githubUrl: "https://github.com/Arjun-3105/mcp-observer",
+    liveUrl: "https://github.com/Arjun-3105/mcp-observer",
+    highlights: [
+      "Zero-config stdio proxy sitting transparently between MCP client and server",
+      "Flagged infinite retry loops within a 60-second window and hung RPC requests past 15s",
+      "Direct OTel span and log export to SigNoz collector with trace-to-log correlation",
+      "Appended structured diagnostic summaries to OTel log attributes for faster root-cause analysis",
+    ],
+    caseStudy: {
+      problem:
+        "The Model Context Protocol has no native observability layer. When an AI agent calls tools through an MCP server, developers cannot inspect latency spikes, infinite tool retry loops, or hung server processes.",
+      idea: "A drop-in stdio proxy intercepting JSON-RPC messages between MCP clients and servers to emit standard OpenTelemetry traces, detect runtime anomalies, and correlate logs with active spans.",
+      system: {
+        overview:
+          "mcp-observer sits transparently on stdin/stdout. It parses JSON-RPC requests and responses, calculates tool call durations, and streams standard OpenTelemetry data to SigNoz.",
+        architecture: [
+          "stdio transparent stream passthrough with zero serialization delay",
+          "JSON-RPC stream parser tracking inflight requests against timeout budgets",
+          "Sliding-window anomaly detection flagging retry loops (>60s) and hung calls (>15s)",
+          "OpenTelemetry SDK exporter streaming spans and structured logs to SigNoz OTLP endpoints",
+        ],
+        technologies: ["TypeScript", "Node.js", "OpenTelemetry SDK", "SigNoz", "JSON-RPC 2.0", "Docker"],
+      },
+      build: {
+        details:
+          "Built non-blocking stdin/stdout pipes ensuring tool execution payloads flow without serialization delay. Captured request/response correlation IDs to match spans with diagnostic error logs.",
+        keyDecisions: [
+          "Used standard OpenTelemetry semantics rather than proprietary logging formats to prevent telemetry lock-in.",
+          "Enforced sliding-window heuristic checks to catch repetitive tool calling loops before token allowances exhaust.",
+        ],
+      },
+      result: {
+        metrics: [
+          "100% transparent zero-config stdio passthrough",
+          "Caught hung RPC requests within 15-second latency threshold",
+          "1-click trace-to-log correlation in SigNoz UI",
+        ],
+        outcome:
+          "Provides engineers with complete runtime visibility into agent tool executions and failure modes in local and distributed MCP setups.",
+      },
+      learnings:
+        "Observability for agentic tool use must be protocol-level and non-invasive. Correlating actionable error logs directly with trace spans eliminates hours of blind debugging.",
+    },
+  },
+  {
+    id: "notestamp",
+    number: "02",
+    name: "LearnLoop",
+    tagline: "Proof of learning platform with multi-modal ingestion & WASM evaluation.",
+    description:
+      "Transforms YouTube videos, PDFs, and technical articles into flashcards, notes, and Dagre concept graphs, featuring Pyodide WASM in-browser code evaluation and ERC-721 skill credentials.",
+    tags: ["NEXT.JS 15", "PYODIDE WASM", "SOLIDITY", "OPENROUTER"],
     image: "/images/projects/learnloop-app.png",
     githubUrl: "https://github.com/Arjun-3105/note-stamp",
     liveUrl: "https://note-stamp.vercel.app",
     highlights: [
-      "Specialized modes: AI Teacher, Corrector, Quiz Hint, Roadmap Guide, Problem Solver",
-      "Multimodal ingestion for complex technical documentation, lectures & PDFs",
-      "Sub-2s citation backlinking to exact source timestamps and passages",
-      "Deployed and live in production on Vercel",
+      "Pipeline converting YouTube videos, PDFs, and documentation into flashcards, notes & Dagre graphs",
+      "Multi-modal verification engine pairing GitHub OAuth repository analysis with Pyodide WASM sandboxing",
+      "Symbolic math evaluation engine powered by Algebrite",
+      "ERC-721 credentialing system issuing tamper-resistant skill proofs on milestone completion",
     ],
     caseStudy: {
       problem:
-        "Students and researchers drown in fragmented learning materials—juggling long technical video lectures, dense 50-page PDF slides, and scattered web docs without unified synthesis or active recall.",
-      idea: "A unified, multi-modal ingestion workspace that converts any media into interactive mental models, generating tailored explanations, active-recall quizzes, and citation-backed notes with targeted cognitive roles.",
+        "Technical learning materials are fragmented across long video lectures, dense PDF slides, and documentation without verified assessment of whether a learner actually understood or implemented the code.",
+      idea: "A unified ingestion workspace that parses multi-format technical media into structured notes and concept graphs, backed by in-browser WASM code execution and tamper-resistant credentials.",
       system: {
         overview:
-          "LearnLoop (built on the NoteStamp core) pairs a high-throughput multi-modal parser with a hybrid RAG pipeline. Media is parsed into semantically coherent chunks, embedded via dense vectors, and routed to specialized reasoning modes.",
+          "LearnLoop ingests video, audio, and documents into semantically aligned chunks. Code exercises are tested client-side via Pyodide WebAssembly sandboxes without requiring external remote execution clusters.",
         architecture: [
-          "Streaming video/audio transcription with chunked timestamp alignment",
-          "Hybrid search: BM25 keyword matching blended with dense embeddings",
-          "Specialized cognitive roles: AI Teacher, Corrector, Quiz Hint, Roadmap Guide, and Problem Solver",
+          "Video and document ingestion pipeline with chunked timestamp alignment",
+          "Dagre-rendered interactive concept graphs mapping topic prerequisites",
+          "Pyodide WebAssembly sandbox for safe, in-browser Python code execution and grading",
+          "Smart contract verification engine issuing ERC-721 skill credentials upon milestone completion",
         ],
-        technologies: ["Next.js 15", "FastAPI", "Pinecone", "LangChain", "OpenAI / Claude", "Tailwind CSS", "Vercel"],
+        technologies: ["Next.js 15", "Pyodide WASM", "OpenRouter", "Ethers.js", "Solidity", "Dagre", "Tailwind CSS"],
       },
       build: {
         details:
-          "Engineered an intelligent chunking algorithm that respects natural lecture slide transitions rather than naive character counts. Implemented low-latency caching on repeated video queries to eliminate duplicate LLM inference.",
+          "Engineered slide-aware chunking to group video transcription with slide transitions. Implemented client-side WASM sandboxing with Pyodide to run automated unit tests against user code submissions in <500ms.",
         keyDecisions: [
-          "Preserved source timestamps in vector metadata to allow users to click any note bullet and jump to the exact second in the lecture video.",
-          "Separated document processing into asynchronous background workers using BullMQ and Redis.",
+          "Executed code evaluation inside browser WASM sandboxes to eliminate server-side execution security risks and hosting costs.",
+          "Anchored concept notes to precise video timestamps for instant source verification.",
         ],
       },
       result: {
         metrics: [
           "1,500+ study hours processed",
-          "Sub-2s query latency on complex multi-page synthesis",
+          "Sub-500ms in-browser code test execution via Pyodide WASM",
           "92% precision in exact lecture timestamp citation",
           "Live in production at note-stamp.vercel.app",
         ],
         outcome:
-          "Transforms passive reading and video watching into an active, conversational cognitive workout with citation-grounded answers.",
+          "Replaces passive video watching with verified code execution, concept graphs, and tamper-resistant credentials.",
       },
       learnings:
-        "Real learning requires active generation and immediate feedback loops. Giving users distinct personas (Teacher vs Quizzer vs Solver) dramatically improved retention over a generic chatbot interface.",
+        "Evaluating learner comprehension requires deterministic test execution (WASM unit tests, symbolic math) rather than trusting conversational evaluations.",
     },
   },
   {
     id: "legalassistant",
-    number: "02",
+    number: "03",
     name: "RoBERTa Legal AI",
-    tagline: "Agentic legal document analysis & contract risk assessment.",
+    tagline: "Legal document analysis & contract risk assessment.",
     description:
-      "A fine-tuned RoBERTa platform for legal document analysis, RAG-based retrieval with agent task decomposition, and clause risk classification across 300+ legal documents.",
-    tags: ["ROBERTA", "LEGAL AI", "CHROMADB", "STREAMLIT"],
+      "Fine-tuned RoBERTa transformer pipeline for legal document analysis, contract risk classification, and vector retrieval across complex legal agreements.",
+    tags: ["ROBERTA", "LEGAL NLP", "RAG", "CHROMADB"],
     image: "/images/projects/legalassistant-app.png",
     githubUrl: "https://github.com/Arjun-3105/legalAssistant",
     liveUrl: "https://legalsummariz.streamlit.app",
     highlights: [
-      "Live at legalsummariz.streamlit.app",
-      "Agent Task Decomposition: Classify → Retrieve → Analyze → Synthesize",
-      "T5 trained on CUAD (21K+ clauses) with 88.1% accuracy across 42 categories",
-      "ChromaDB persistent vector store reasoning over 300+ documents",
+      "Fine-tuned RoBERTa on CUAD legal contract dataset (21K+ clauses)",
+      "Improved factual accuracy by ~40% over zero-shot baseline via task decomposition",
+      "Sub-second retrieval across 30+ legal documents using optimized vector chunking",
+      "Live production deployment on Streamlit Cloud",
     ],
     caseStudy: {
       problem:
-        "Legal contracts and compliance filings are dense, high-stakes documents where naive keyword search misses critical liability clauses and generic LLMs hallucinate non-existent statutory terms.",
-      idea: "A domain-specialized legal intelligence platform combining fine-tuned transformer models (RoBERTa & T5) with persistent vector indexing and structured agent task decomposition.",
+        "Legal contracts are dense documents where standard search misses critical liability clauses and generic zero-shot models hallucinate non-existent statutory obligations.",
+      idea: "A domain-specific legal analysis pipeline combining a fine-tuned RoBERTa model with persistent vector indexing and modular task decomposition (Classify → Retrieve → Analyze → Synthesize).",
       system: {
         overview:
-          "RoBERTa Legal AI decomposes complex legal inquiries into a 4-phase agent pipeline: Classify, Retrieve, Analyze, and Synthesize, pairing ChromaDB vector search with CUAD-trained clause classification.",
+          "RoBERTa Legal AI breaks legal document queries into structured phases: classifying clause categories, querying vector embeddings in ChromaDB, and analyzing liability risk.",
         architecture: [
-          "Agent task decomposition pipeline: Classify → Retrieve → Analyze → Synthesize",
-          "ChromaDB persistent vector store for multi-document ingestion and simultaneous 300+ document queries",
-          "T5 model trained on CUAD (21K+ clauses) categorizing 42 legal clause types with 88.1% accuracy",
-          "Gemini LLM synthesizer providing citation-backed answers with transparent reasoning traces",
+          "Task decomposition pipeline: Classify → Retrieve → Analyze → Synthesize",
+          "ChromaDB persistent vector store for multi-document ingestion and chunk retrieval",
+          "RoBERTa model fine-tuned on CUAD categorizing clauses with 88.1% accuracy",
+          "Synthesizer producing citation-grounded risk evaluations with exact document passages",
         ],
-        technologies: ["Python", "Streamlit", "RoBERTa", "ChromaDB", "T5 / CUAD", "Gemini API", "Hugging Face"],
+        technologies: ["Python", "Streamlit", "RoBERTa", "ChromaDB", "PyTorch", "Hugging Face"],
       },
       build: {
         details:
-          "Engineered an automated clause-level risk detection engine that scans contracts for indemnity traps, non-compete clauses, and jurisdiction liabilities, benchmarked against non-RAG baselines.",
+          "Trained and benchmarked clause classification on the CUAD dataset. Optimized vector chunking strategies and embedding distance metrics to keep multi-document retrieval under 1 second.",
         keyDecisions: [
-          "Trained on Contract Understanding Atticus Dataset (CUAD) to achieve 88.1% classification accuracy across 42 legal categories.",
-          "Established empirical RAG vs. no-RAG benchmarks, showing a ~40% accuracy increase when retrieval-augmented.",
+          "Fine-tuned domain-specific weights on CUAD rather than relying on generic zero-shot prompts.",
+          "Implemented empirical retrieval benchmarks demonstrating a ~40% factual accuracy gain over non-retrieval baselines.",
         ],
       },
       result: {
         metrics: [
-          "88.1% accuracy on 42 legal clause categories",
-          "~40% accuracy gain over baseline LLM retrieval",
-          "300+ legal documents queried simultaneously",
+          "88.1% classification accuracy across 42 legal categories",
+          "~40% accuracy improvement over zero-shot baseline",
+          "Sub-second retrieval latency across 30+ legal documents",
         ],
         outcome:
-          "Accelerates contract review from hours to seconds while generating transparent risk evaluations and PDF audit reports.",
+          "Accelerates contract audit turnaround from hours to seconds while generating transparent risk evaluations.",
       },
       learnings:
-        "In legal AI, single-prompt LLM architectures fail because legal analysis is fundamentally multi-phase: you cannot analyze liability before classifying clause enforceability and retrieving domain context.",
+        "Domain-specific fine-tuning coupled with structured multi-step retrieval is essential in high-liability verticals like legal tech where generic chatbots fail.",
     },
   },
   {
     id: "vaani",
-    number: "03",
+    number: "04",
     name: "Vaani",
-    tagline: "Voice-enabled RAG system for real conversations in Hindi.",
+    tagline: "Voice-enabled RAG system for conversations in Hindi.",
     description:
-      "A speech-to-speech conversational AI system built for Hackathon Goa 2026. Streams Hindi audio end-to-end using Sarvam AI STT/TTS, FAISS vector retrieval over MS MARCO-X!, Groq-accelerated generation, and 4 strict hallucination guardrails.",
+      "A speech-to-speech conversational system built for Hackathon Goa 2026. Streams Hindi audio end-to-end using Sarvam AI STT/TTS, FAISS vector retrieval over MS MARCO-X!, Groq-accelerated generation, and 4 strict hallucination guardrails.",
     tags: ["VOICE RAG", "HINDI STT/TTS", "FAISS", "SARVAM AI", "GROQ"],
     image: "/images/projects/vaani-app.png",
     githubUrl: "https://github.com/Arjun-3105/vaani",
@@ -179,78 +233,26 @@ export const projects: Project[] = [
       },
       result: {
         metrics: [
-          "74,182 vectors indexed in FAISS",
-          "End-to-end speech-to-speech Hindi generation",
+          "74,182 passages indexed in FAISS vector store",
+          "Sub-second end-to-end speech-to-speech latency",
+          "Zero fabricated answers via multi-stage grounding guardrails",
           "Live in production on HuggingFace Spaces (oxarjun/vaani)",
         ],
         outcome:
-          "Delivers natural, spoken Hindi answers grounded strictly in retrieved documents with timed latency metrics at every stage.",
+          "Proves that conversational Indic voice assistants can achieve low latency without compromising on factual verification.",
       },
       learnings:
-        "Indic speech RAG requires specialized acoustic models and multilingual embeddings. Treating Hindi as a first-class citizen rather than translating to English dramatically boosts user engagement and trust.",
-    },
-  },
-  {
-    id: "hirelens",
-    number: "04",
-    name: "HireLens AI",
-    tagline: "AI-powered engineering portfolio & code translation.",
-    description:
-      "Transforms fragmented GitHub commit histories into cohesive, recruiter-ready profiles with architectural scoring, technical metrics, and 3D contribution graphs.",
-    tags: ["NEXT.JS", "AI SCORING", "GITHUB API", "THREE.JS"],
-    image: "/images/projects/hirelens-app.png",
-    githubUrl: "https://github.com/Arjun-3105/githubProfileAnalyzer",
-    liveUrl: "https://github-profile-analyzer-lime.vercel.app",
-    highlights: [
-      "Live at github-profile-analyzer-lime.vercel.app",
-      "Automated repository architecture & commit tree scanning",
-      "3D contribution matrix visualizer & role job-matching",
-      "Instant recruiter-ready technical scoring",
-    ],
-    caseStudy: {
-      problem:
-        "Developer portfolios and GitHub profiles are fragmented across dozens of scattered repos and commit logs, making it impossible for engineering hiring teams to accurately assess technical depth or architectural scale.",
-      idea: "An intelligent analyzer that ingests GitHub repository histories, evaluates architectural patterns and code scale, and synthesizes an executive technical profile with interactive 3D metrics.",
-      system: {
-        overview:
-          "HireLens AI queries GitHub REST & GraphQL endpoints, extracts repository dependency trees, and analyzes code patterns using LLM evaluation agents to generate deep architectural scorecards.",
-        architecture: [
-          "GitHub API ingestion pipeline streaming repository architecture scans",
-          "AI technical translation engine evaluating complexity, test coverage, and engineering scale",
-          "Interactive 3D contribution graph rendered with glowing matrix blocks",
-          "Automated job-matching engine aligning developer strengths with tech stack requirements",
-        ],
-        technologies: ["Next.js 15", "TypeScript", "Tailwind CSS", "GitHub REST/GraphQL", "Three.js / WebGL", "Vercel"],
-      },
-      build: {
-        details:
-          "Built a streaming terminal interface that gives real-time visual feedback during repository cloning and tree analysis, coupled with high-performance client-side 3D rendering.",
-        keyDecisions: [
-          "Deployed to Vercel edge runtime at github-profile-analyzer-lime.vercel.app for sub-3-second profile generation.",
-          "Implemented rate-limit budgeting and aggressive Redis caching for high-volume GitHub user lookups.",
-        ],
-      },
-      result: {
-        metrics: [
-          "Live in production on Vercel",
-          "Full profile synthesis generated in < 3s",
-          "Evaluates architecture, scale, and technical depth across all public repos",
-        ],
-        outcome:
-          "Enables software engineers to present an honest, comprehensive technical narrative to recruiters and hiring managers without tedious manual portfolio assembly.",
-      },
-      learnings:
-        "A developer's commit history holds far more signal than their resume. The challenge is distilling signal from noise—parsing actual architecture decisions rather than just counting commit frequencies.",
+        "In voice systems, speech synthesis latency dominates perceived response time. Pre-warming TTS streams and parallelizing vector retrieval cuts turnaround by over half.",
     },
   },
   {
     id: "emp",
     number: "05",
     name: "Episodic Memory Platform",
-    tagline: "Time-aware semantic memory & episodic RAG architecture.",
+    tagline: "Time-decay semantic memory platform on Endee C++ Vector DB.",
     description:
-      "Production-style cognitive memory backend modeling user knowledge as time-stamped semantic memory events with Endee Vector DB (SIMD C++ / RoaringBitmaps), OpenRouter LLMs, and exponential time decay.",
-    tags: ["ENDEE VECTOR DB", "EPISODIC RAG", "TIME DECAY", "LLAMA NEMOTRON"],
+      "Production-style memory backend modeling user interactions as time-stamped semantic vector events with Endee Vector DB (SIMD C++ / RoaringBitmaps), OpenRouter models, and exponential time decay.",
+    tags: ["ENDEE VECTOR DB", "EPISODIC RAG", "TIME DECAY", "C++ SIMD"],
     image: "/images/projects/emp-app.png",
     githubUrl: "https://github.com/Arjun-3105/endee-EMP-Project",
     liveUrl: "https://episodic-memory-platform.streamlit.app",
@@ -262,18 +264,18 @@ export const projects: Project[] = [
     ],
     caseStudy: {
       problem:
-        "Standard RAG systems treat all documents as flat, static text chunks. When interacting with an AI assistant across days or weeks, context fragments—traditional vector search cannot differentiate between a note taken yesterday versus six months ago, causing recency bias and temporal hallucinations.",
-      idea: "An episodic cognitive memory system that models user knowledge as time-stamped semantic memory events, utilizing an ultra-fast C++ vector engine, metadata pre-filtering, and mathematical time decay.",
+        "Standard RAG systems treat all documents as flat, static text chunks. Traditional vector search cannot differentiate between an interaction yesterday versus six months ago, causing recency bias and temporal hallucinations.",
+      idea: "An episodic memory system that models user knowledge as time-stamped semantic vector events, utilizing an ultra-fast C++ vector engine, metadata pre-filtering, and mathematical time decay.",
       system: {
         overview:
           "Developed for RAGxthon 2026, EMP integrates the Endee vector database with OpenRouter (Gemma 3 27B) and Llama Nemotron embeddings to achieve sub-millisecond retrieval with temporal narrative cohesion.",
         architecture: [
           "Intent Router classifying queries into Recall, Summarize, or Recommend",
-          "Vision LLM ingestion converting image snapshots into rich descriptive metadata",
+          "Vision ingestion converting image snapshots into rich descriptive metadata",
           "Vectorization via nvidia/llama-nemotron-embed into Endee C++ vector engine",
           "Pre-filtering via RoaringBitmaps before HNSW semantic graph traversal",
           "Time-Decay Re-ranking function (e^(-λ·days_old)) balancing similarity with temporal freshness",
-          "Episodic Grouping clustering adjacent events into coherent narrative chapters",
+          "Episodic Grouping clustering adjacent events into coherent chronological chapters",
           "Grounded generation via Google Gemma 3 27B-IT",
         ],
         technologies: [
@@ -291,7 +293,7 @@ export const projects: Project[] = [
           "Engineered a multi-tab application with Agent Query, Raw Search, Memory Map, and Memory Wander for continuous exploration of episodic embeddings.",
         keyDecisions: [
           "Leveraged Endee's RoaringBitmap pre-filtering over user IDs and tags to eliminate partition scanning before graph traversal.",
-          "Implemented a background Memory Reflection agent consolidating daily events into higher-order weekly insights.",
+          "Implemented background consolidation organizing daily events into higher-order weekly summaries.",
         ],
       },
       result: {
@@ -301,10 +303,10 @@ export const projects: Project[] = [
           "Submitted to RAGxthon 2026 Hackathon",
         ],
         outcome:
-          "Empowers autonomous agents and individuals with a cohesive, long-term episodic memory backend that maintains temporal accuracy over extended periods of interaction.",
+          "Provides a long-term episodic memory backend that maintains temporal accuracy over extended periods of interaction.",
       },
       learnings:
-        "Semantic similarity alone is inadequate for personal memory; temporal decay mathematics and episodic clustering are essential to recreate human-like cognitive recall.",
+        "Semantic similarity alone is inadequate for personal memory; temporal decay mathematics and episodic clustering are essential to recreate chronological recall.",
     },
   },
   {
@@ -314,7 +316,7 @@ export const projects: Project[] = [
     tagline: "Grounded Linux system action engine & voice assistant.",
     description:
       "Wayland & GNOME context-aware desktop automation engine bridging voice commands, hotkeys, and desktop clipboard with live Linux system telemetry for deterministic, hallucination-free OS operations.",
-    tags: ["LINUX / WAYLAND", "VOICE AUTOMATION", "GROQ WHISPER", "PYTHON DAEMON"],
+    tags: ["LINUX / WAYLAND", "SYSTEM AUTOMATION", "GROQ WHISPER", "PYTHON DAEMON"],
     image: "/images/projects/lynx-app.png",
     githubUrl: "https://github.com/Arjun-3105/lynx",
     liveUrl: "https://github.com/Arjun-3105/lynx",
@@ -355,7 +357,7 @@ export const projects: Project[] = [
           "100% Wayland native compatibility on Ubuntu 24.04",
         ],
         outcome:
-          "Delivered a seamless, hands-free Linux engineering copilot that turns conversational intents into verifiable, safe system operations.",
+          "Delivered a hands-free Linux engineering copilot that turns voice requests into verifiable, safe system operations.",
       },
       learnings:
         "Real system automation requires grounding on live facts, not generative guesses. Inspecting systemctl and socket state first transforms an unreliable LLM into a dependable systems engineer.",
@@ -365,23 +367,23 @@ export const projects: Project[] = [
     id: "nook",
     number: "07",
     name: "Nook 🌱",
-    tagline: "Local-first cozy browser companion & tab terrarium.",
+    tagline: "Local-first browser tab manager & reading workspace.",
     description:
-      "A quiet, private browser companion for people with curious minds and too many open tabs. Features an ambient tab terrarium, dynamic creature reacting to tab hygiene, and reading return points.",
-    tags: ["LOCAL-FIRST", "CHROME EXTENSION", "MANIFEST V3", "TAB HYGIENE"],
+      "A quiet, private browser companion for organizing open tabs. Features a local-first tab manager, creature states reacting to open tab volume, and scroll-position return points.",
+    tags: ["LOCAL-FIRST", "CHROME EXTENSION", "MANIFEST V3", "INDEXEDDB"],
     image: "/images/projects/nook-app.png",
     githubUrl: "https://github.com/Arjun-3105/nook",
     liveUrl: "https://github.com/Arjun-3105/nook",
     highlights: [
       "Manifest V3 local-first architecture with zero external telemetry",
-      "Ambient Tab Terrarium with creature states reflecting open tab volume",
+      "Ambient tab overview with states reflecting open tab volume",
       "Return Point pill remembering reading positions on long articles and docs",
       "Interactive showcase with ambient room sounds and soundscapes",
     ],
     caseStudy: {
       problem:
-        "Modern browsing promotes cognitive overload. Engineers accumulate dozens of technical tabs, articles, and documentation pages, losing their place and experiencing tab anxiety.",
-      idea: "A cozy, ambient browser companion that transforms the chaotic New Tab into a calm terrarium, gently encouraging tab hygiene while quietly remembering exact reading scroll positions.",
+        "Modern browsing leads to tab overload. Engineers accumulate dozens of technical tabs, articles, and documentation pages, losing their place across multiple windows.",
+      idea: "A local-first browser companion that transforms the chaotic New Tab into a calm overview, encouraging clean tab hygiene while remembering exact reading scroll positions.",
       system: {
         overview:
           "Nook is built with Chrome Manifest V3, WebExtensions APIs, and local IndexedDB storage to guarantee absolute user privacy with no cloud sync or third-party analytics.",
@@ -396,9 +398,9 @@ export const projects: Project[] = [
       },
       build: {
         details:
-          "Crafted high-fidelity pixel art animations and serene audio cues. Designed a non-intrusive floating leaf pill that appears only when returning to an unfinished long-form document.",
+          "Crafted pixel art animations and serene audio cues. Designed a non-intrusive floating leaf pill that appears only when returning to an unfinished long-form document.",
         keyDecisions: [
-          "Kept all tab metadata entirely client-side to respect personal cognitive privacy.",
+          "Kept all tab metadata entirely client-side to guarantee personal privacy.",
           "Replaced generic numerical tab counts with ambient creature mood shifts (proud, sleepy, concerned).",
         ],
       },
@@ -409,10 +411,10 @@ export const projects: Project[] = [
           "Built-in full interactive showcase and soundscapes",
         ],
         outcome:
-          "Creates a gentle, restorative browsing experience that respects human cognitive attention and ends the stress of forgotten reading tabs.",
+          "Creates a focused, restorative browsing experience that ends the stress of forgotten reading tabs.",
       },
       learnings:
-        "Software doesn't have to shout or gamify productivity with aggressive notifications. Ambient, cozy feedback loops can influence digital hygiene much more sustainably.",
+        "Software doesn't have to shout or gamify productivity with aggressive notifications. Ambient, quiet feedback loops influence digital hygiene much more sustainably.",
     },
   },
   {
@@ -467,5 +469,5 @@ export const projects: Project[] = [
       learnings:
         "Simple, dedicated utilities that eliminate mundane digital friction often deliver more daily value than over-engineered multi-featured platforms.",
     },
-  }
+  },
 ];

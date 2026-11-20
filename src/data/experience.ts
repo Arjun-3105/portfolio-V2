@@ -22,7 +22,7 @@ export const workExperiences: WorkExperience[] = [
   {
     company: "WhatBytes",
     role: "Full Stack Developer Intern",
-    period: "July 2026 – Present",
+    period: "April 2026 – Present",
     location: "Remote",
     type: "Internship",
     description:
@@ -52,7 +52,7 @@ export const workExperiences: WorkExperience[] = [
     ],
   },
   {
-    company: "Stealth Startup",
+    company: "Stealth Startup (Freelance)",
     role: "Software Engineer Intern",
     period: "December 2025 – April 2026",
     location: "Remote",
@@ -93,21 +93,21 @@ export const educationInfo = {
 
 export const achievementsList: Achievement[] = [
   {
-    title: "Open Source Systems",
-    subtitle: "Production & Tooling",
-    description: "Architected and shipped production-ready open source systems including LearnLoop, RoBERTa Legal AI, and high-throughput vector platforms.",
-    metric: "8+ Repos",
-    tag: "Open Source · Systems",
+    title: "Competitive Problem Solving",
+    subtitle: "LeetCode & DSA",
+    description: "Solved 400+ DSA problems across LeetCode and competitive programming platforms, reaching a ~1550 rating.",
+    metric: "400+ DSA (~1550)",
+    tag: "Problem Solving",
   },
   {
     title: "University Hackathons",
-    subtitle: "Rapid Prototyping & Systems",
+    subtitle: "Rapid Systems Prototyping",
     description: "Ranked in the Top 20 across multiple competitive hackathons; awarded Dean's List for sustained academic excellence.",
     metric: "Top 20",
     tag: "Dean's List Award",
   },
   {
-    title: "Hyperspectral Research",
+    title: "Hyperspectral ML Research",
     subtitle: "Machine Learning & Remote Sensing",
     description: "Authored research on UAV hyperspectral imaging for wheat yield prediction utilizing the Minnesota DRUM agricultural dataset.",
     metric: "Research",

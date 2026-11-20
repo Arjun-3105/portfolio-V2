@@ -102,7 +102,7 @@ export default function InteractiveTerminal() {
                 <span>Open Resume (PDF) ↗</span>
               </a>
               <a
-                href="https://drive.google.com/file/d/1lKIyUldZqYB-vqjWUxCE5TK4yIniwEt8/view?usp=sharing"
+                href="https://drive.google.com/file/d/1S0h3VsgnqIvGnYXiby7LhHNqAUPalr_9/view?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-canvas border border-editorial-border text-fg-muted hover:text-fg transition-colors"
@@ -119,16 +119,19 @@ export default function InteractiveTerminal() {
         outputNode = (
           <div className="space-y-2 font-mono text-[11px] text-fg-muted">
             <div>
-              <span className="text-fg font-medium">Languages:</span> Python, TypeScript, JavaScript, C++, SQL
+              <span className="text-fg font-medium">Languages:</span> Python, Java, JavaScript, TypeScript, C++
             </div>
             <div>
-              <span className="text-fg font-medium">Backend &amp; Infra:</span> Django REST, FastAPI, Celery, Redis, Docker, Linux, OpenTelemetry
+              <span className="text-fg font-medium">Backend &amp; Infra:</span> Node.js, Express.js, Django REST, Celery, Redis, Docker, Linux, OpenTelemetry
             </div>
             <div>
-              <span className="text-fg font-medium">Databases &amp; Search:</span> PostgreSQL, MongoDB, ChromaDB, FAISS, Endee Vector DB
+              <span className="text-fg font-medium">Databases &amp; Search:</span> PostgreSQL, MongoDB, SQL, Redis, Endee Vector DB, ChromaDB, FAISS
             </div>
             <div>
-              <span className="text-fg font-medium">Frontend &amp; Tools:</span> Next.js 15, React, Tailwind CSS, Git, Postman
+              <span className="text-fg font-medium">ML &amp; Systems:</span> PyTorch, HuggingFace, LangChain, RAG, LLM Pipelines
+            </div>
+            <div>
+              <span className="text-fg font-medium">Frontend &amp; Tools:</span> React.js, Next.js, Tailwind CSS, Git, Postman
             </div>
           </div>
         );
@@ -138,8 +141,8 @@ export default function InteractiveTerminal() {
         outputNode = (
           <div className="space-y-1.5 font-mono text-[11px] text-fg-muted">
             <p>📊 <span className="text-fg font-medium">Academics:</span> CGPA 9.5 / 10 (Dean&apos;s List · Top 5% at Bennett University)</p>
-            <p>💻 <span className="text-fg font-medium">Systems:</span> 8+ open-source production projects across RAG, vector search &amp; Linux daemons</p>
-            <p>🏢 <span className="text-fg font-medium">Internship:</span> WhatBytes (Django, Celery, Redis, Playwright scraping)</p>
+            <p>💡 <span className="text-fg font-medium">Problem Solving:</span> 400+ DSA problems solved on LeetCode &amp; competitive platforms (~1550 rating)</p>
+            <p>🏢 <span className="text-fg font-medium">Internship:</span> WhatBytes (Celery, Redis, Scrapy) &amp; Stealth Startup (OCR + LLM pipeline)</p>
             <p>🏆 <span className="text-fg font-medium">Hackathons:</span> Top 20 across multiple university hackathons</p>
             <p>🔬 <span className="text-fg font-medium">Research:</span> UAV hyperspectral imaging for wheat yield prediction (Minnesota DRUM)</p>
           </div>
@@ -152,10 +155,10 @@ export default function InteractiveTerminal() {
             <div className="border-l-2 border-editorial-accent pl-2.5">
               <p className="text-fg font-medium">WhatBytes — Full Stack / Backend Intern</p>
               <p className="text-[10px] text-fg-subtle">April 2026 – Present · Remote</p>
-              <p className="mt-0.5">Built Django REST APIs, WebSockets via Daphne, Celery background queues, and automated web scrapers for content ranking.</p>
+              <p className="mt-0.5">Built asynchronous distributed scraping pipelines, Redis community chat, Celery worker queues, and sub-40ms feed ranking.</p>
             </div>
             <div className="border-l-2 border-editorial-border pl-2.5">
-              <p className="text-fg font-medium">Stealth Startup — Software Engineer Intern</p>
+              <p className="text-fg font-medium">Stealth Startup (Freelance) — Software Engineer Intern</p>
               <p className="text-[10px] text-fg-subtle">Dec 2025 – April 2026 · Remote</p>
               <p className="mt-0.5">Cut quotation turnaround time by ~70% using OCR + LLM pipelines and automated line-item matching against live inventory.</p>
             </div>
@@ -166,11 +169,12 @@ export default function InteractiveTerminal() {
       case "projects":
         outputNode = (
           <div className="space-y-1.5 font-mono text-[11px] text-fg-muted">
-            <p>1. <span className="text-fg font-medium">LearnLoop</span> — Multi-modal active recall workspace (Next.js 15, FastAPI, LangChain)</p>
-            <p>2. <span className="text-fg font-medium">Vaani</span> — Hindi Voice RAG with Sarvam AI STT/TTS &amp; FAISS on Hugging Face</p>
+            <p>1. <span className="text-fg font-medium">MCP-Observer</span> — Distributed observability proxy for AI agent tool calls (OTel, SigNoz)</p>
+            <p>2. <span className="text-fg font-medium">LearnLoop</span> — Proof of learning platform with Pyodide WASM in-browser evaluation</p>
             <p>3. <span className="text-fg font-medium">RoBERTa Legal AI</span> — Fine-tuned transformer contract risk analyzer (Streamlit, ChromaDB)</p>
-            <p>4. <span className="text-fg font-medium">Episodic Memory Platform</span> — Time-decay cognitive memory on Endee C++ Vector DB</p>
-            <p>5. <span className="text-fg font-medium">Lynx</span> — Grounded Linux Wayland automation daemon with Groq Whisper</p>
+            <p>4. <span className="text-fg font-medium">Vaani</span> — Hindi Voice RAG with Sarvam AI STT/TTS &amp; FAISS on Hugging Face</p>
+            <p>5. <span className="text-fg font-medium">Episodic Memory Platform</span> — Time-decay semantic memory on Endee C++ Vector DB</p>
+            <p>6. <span className="text-fg font-medium">Lynx</span> — Grounded Linux Wayland automation daemon with Groq Whisper</p>
           </div>
         );
         break;

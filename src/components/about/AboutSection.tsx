@@ -35,7 +35,7 @@ export default function AboutSection() {
                 Most of my engineering revolves around backend systems, asynchronous task queues with Celery &amp; Redis, web scraping pipelines, and domain-grounded retrieval (RAG). I like building tools that are fast, deterministic, and handle messy real-world data without breaking.
               </p>
               <p>
-                I maintain a <span className="text-fg font-medium">9.5 / 10 CGPA</span> (Top 5% · Dean&apos;s List), and spend my free time exploring Linux system internals and shipping production-ready open-source projects like LearnLoop, RoBERTa Legal AI, and Vaani.
+                I maintain a <span className="text-fg font-medium">9.5 / 10 CGPA</span> (Top 5% · Dean&apos;s List), and spend my free time exploring Linux system internals and shipping production-ready open-source projects like MCP-Observer, LearnLoop, and RoBERTa Legal AI.
               </p>
             </div>
 
@@ -66,22 +66,22 @@ export default function AboutSection() {
               <div className="p-3.5 rounded-xl border border-editorial-border bg-canvas-card space-y-1">
                 <div className="flex items-center gap-2 text-editorial-accent text-xs font-mono">
                   <Code2 className="w-4 h-4" />
-                  <span>OPEN SOURCE</span>
+                  <span>PROBLEM SOLVING</span>
                 </div>
-                <p className="text-xs font-semibold text-fg">8+ Flagship Projects</p>
+                <p className="text-xs font-semibold text-fg">400+ DSA Problems</p>
                 <p className="text-[11px] text-fg-muted">
-                  Production systems, RAG, &amp; vector tooling
+                  LeetCode &amp; competitive platforms (~1550 rating)
                 </p>
               </div>
 
               <div className="p-3.5 rounded-xl border border-editorial-border bg-canvas-card space-y-1">
                 <div className="flex items-center gap-2 text-editorial-accent text-xs font-mono">
                   <Award className="w-4 h-4" />
-                  <span>ACHIEVEMENTS</span>
+                  <span>HONORS &amp; RESEARCH</span>
                 </div>
-                <p className="text-xs font-semibold text-fg">Dean&apos;s List &amp; Hackathons</p>
+                <p className="text-xs font-semibold text-fg">Dean&apos;s List · Top 20 Hackathons</p>
                 <p className="text-[11px] text-fg-muted">
-                  Top 20 in university hackathons · ML Research
+                  UAV hyperspectral ML research (DRUM dataset)
                 </p>
               </div>
             </div>

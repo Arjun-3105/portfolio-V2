@@ -19,7 +19,7 @@ import {
 
 export default function SelectedWork() {
   const { playKey } = useSound();
-  const [activeIndex, setActiveIndex] = useState(2); // Default to Vaani (03)
+  const [activeIndex, setActiveIndex] = useState(0); // Default to MCP-Observer (01)
   const [modalProjectId, setModalProjectId] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const total = projects.length;

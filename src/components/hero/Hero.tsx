@@ -76,7 +76,7 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
           </h1>
 
           <p className="text-sm sm:text-base text-fg-muted font-light leading-relaxed max-w-md">
-            I&apos;m Arjun — a backend engineer and builder currently interning at WhatBytes. I engineer high-throughput scraping pipelines, distributed task queues with Celery &amp; Redis, and low-latency voice RAG.
+            I&apos;m Arjun — a backend and systems engineer currently interning at WhatBytes. I engineer high-throughput scraping pipelines, distributed task queues with Celery &amp; Redis, and low-latency retrieval systems.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -174,7 +174,7 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
               {/* Floating Architectural HUD Badges */}
               <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
                 <span className="text-[9px] font-mono uppercase tracking-ultrawide text-white/80 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
-                  {theme === "dark" ? "HORIZON • 01" : "PORTAL • 01"}
+                  {theme === "dark" ? "SYSTEMS • 01" : "BACKEND • 01"}
                 </span>
                 <span className="text-[9px] font-mono tracking-widest text-white/70 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full">
                   BUILDER ARCHIVE
@@ -185,7 +185,7 @@ export default function Hero({ onOpenCaseStudy }: HeroProps) {
               <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 text-white pointer-events-none">
                 <p className="text-[10px] font-mono uppercase tracking-ultrawide text-stone-300">SYSTEM ARCHITECTURE</p>
                 <p className="editorial-italic text-sm text-stone-100 mt-0.5">
-                  &ldquo;Distributed queues, low latency, calm software.&rdquo;
+                  &ldquo;Distributed queues, asynchronous pipelines, low latency.&rdquo;
                 </p>
               </div>
             </div>
